@@ -1,0 +1,32 @@
+{
+  "nombre": "Modelo base (mm4)",
+  "hiperparametros": {},
+  "n_arboles": 99,
+  "metricas": {
+    "validacion": {
+      "por_plato": {
+        "MAE": 0.6386752136752136,
+        "RMSE": 1.046335689952501,
+        "SMAPE": 109.66068374593641
+      },
+      "total_semanal": {
+        "MAE": 12.375,
+        "RMSE": 14.393925668623073,
+        "SMAPE": 54.758065177991064
+      }
+    },
+    "prueba": {
+      "por_plato": {
+        "MAE": 0.4995726495726496,
+        "RMSE": 0.8705165967970658,
+        "SMAPE": 102.57467205646495
+      },
+      "total_semanal": {
+        "MAE": 9.51923076923077,
+        "RMSE": 11.725834397077776,
+        "SMAPE": 62.50123976839881
+      }
+    }
+  },
+  "criterio_exito_xgb_mejor_en_n_de_3_metricas_prueba": 1
+}

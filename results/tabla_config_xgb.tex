@@ -1,0 +1,11 @@
+% Cuadro 6.2: configuración de XGBoost
+
+\texttt{objective} & reg:squarederror, reg:tweedie & reg:tweedie \\
+\texttt{tweedie\_variance\_power} & 1,2; 1,5 & 1,5 \\
+\texttt{n\_estimators} & hasta 1.000 (parada temprana 50) & 99 \\
+\texttt{max\_depth} & 3, 4, 6 & 6 \\
+\texttt{learning\_rate} & 0,03; 0,1 & 0,1 \\
+\texttt{subsample} & 0,8; 1,0 & 0,8 \\
+\texttt{colsample\_bytree} & 0,8; 1,0 & 0,8 \\
+\texttt{min\_child\_weight} & 1, 5 & 1 \\
+\texttt{random\_state} & 42 & 42 \\

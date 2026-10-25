@@ -1,0 +1,25 @@
+modelo,conjunto,nivel,metrica,valor
+Modelo base (mm4),validacion,por_plato,MAE,0.6386752136752136
+Modelo base (mm4),validacion,por_plato,RMSE,1.046335689952501
+Modelo base (mm4),validacion,por_plato,SMAPE,109.66068374593641
+Modelo base (mm4),validacion,total_semanal,MAE,12.375
+Modelo base (mm4),validacion,total_semanal,RMSE,14.393925668623073
+Modelo base (mm4),validacion,total_semanal,SMAPE,54.758065177991064
+Modelo base (mm4),prueba,por_plato,MAE,0.4995726495726496
+Modelo base (mm4),prueba,por_plato,RMSE,0.8705165967970658
+Modelo base (mm4),prueba,por_plato,SMAPE,102.57467205646495
+Modelo base (mm4),prueba,total_semanal,MAE,9.51923076923077
+Modelo base (mm4),prueba,total_semanal,RMSE,11.725834397077776
+Modelo base (mm4),prueba,total_semanal,SMAPE,62.50123976839881
+XGBoost,validacion,por_plato,MAE,0.6994650011563786
+XGBoost,validacion,por_plato,RMSE,1.0186401299772183
+XGBoost,validacion,por_plato,SMAPE,160.4393871064702
+XGBoost,validacion,total_semanal,MAE,11.559057749234713
+XGBoost,validacion,total_semanal,RMSE,13.578315247711478
+XGBoost,validacion,total_semanal,SMAPE,50.19060409649726
+XGBoost,prueba,por_plato,MAE,0.5579413530571012
+XGBoost,prueba,por_plato,RMSE,0.8412314083995093
+XGBoost,prueba,por_plato,SMAPE,176.24238550665652
+XGBoost,prueba,total_semanal,MAE,9.848414714519794
+XGBoost,prueba,total_semanal,RMSE,12.35778415942335
+XGBoost,prueba,total_semanal,SMAPE,59.42907471915058
