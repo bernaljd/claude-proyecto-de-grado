@@ -8,6 +8,7 @@ import xgboost as xgb
 
 from .entrenar import datos_modelo
 from .ingenieria_menu import ACCIONES, agregar_periodo, alertas, clasificar
+from .modelos import lstm as lm
 from .modelos import xgboost_modelo as xm
 from .preparacion import COLUMNAS_BASE
 from .proyeccion_diaria import DIAS, mayor_residuo, participaciones, pesos_plato
@@ -39,7 +40,7 @@ def fila_siguiente(g: pd.DataFrame, semana: pd.Timestamp) -> dict:
 
 
 def main():
-    validos, serie, estados, X, cols, modelables, cats = datos_modelo()
+    validos, serie, estados, X, cols, modelables, cats, var = datos_modelo()
     vigente = json.loads(Path("models/modelo_vigente.json").read_text())
     cfg = json.loads(Path("models/xgb_config.json").read_text())
     ultima = serie["semana"].max()
@@ -52,28 +53,37 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     modelo.get_booster().save_model(str(OUT / "modelo_xgb.json"))
     conf = json.loads(modelo.get_booster().save_config())["learner"]["learner_model_param"]
-    meta = {"vigente": "xgboost" if vigente["nombre"] == "XGBoost" else "base",
+    # En el navegador solo se evalúa XGBoost: si el vigente es LSTM, la recarga de archivos usa XGBoost.
+    meta = {"vigente": "base" if vigente["nombre"].startswith("Modelo base") else "xgboost",
+            "modelo_vigente": vigente["nombre"],
             "columnas": cols, "platos": modelables, "categorias": cats,
             "objetivo": cfg["params"]["objective"], "base_score": float(str(conf["base_score"]).strip("[]")),
             "n_arboles": cfg["n_arboles"], "semana_proyectada": str(siguiente.date())}
     dump("modelo_meta.json", meta)
 
     # --- Proyección semanal por plato ---
-    proy, filas, exactas = {}, {}, {}
+    proy, filas, exactas, filas_fx = {}, {}, {}, {}
     for plato, g in serie.groupby("plato"):
         g = g.sort_values("semana")
         est = estados[plato]
         if est == "retirado":
             continue
         f = fila_siguiente(g, siguiente)
+        filas_fx[plato] = {"fila": f, "precio": float(g["precio"].iloc[-1])}
         if est == "historial_insuficiente":
             primera = g.loc[g["unidades"] > 0, "semana"].min()
             disp = g[g["semana"] >= primera]["unidades"].to_numpy()[-4:]
             exactas[plato] = float(np.mean(disp)); proy[plato] = redondear(exactas[plato])
-        elif meta["vigente"] == "base":
+        elif vigente["nombre"].startswith("Modelo base"):
             exactas[plato] = f["mm4"]; proy[plato] = redondear(f["mm4"])
+        elif vigente["nombre"] == "LSTM":
+            continue  # se proyecta con el modelo guardado, más abajo
         else:
             filas[plato] = f
+    if vigente["nombre"] == "LSTM":
+        for p, v in lm.proyectar_siguiente(var, modelables, Path("models/lstm"), siguiente).items():
+            exactas[p] = v
+            proy[p] = redondear(v)
     if filas:
         M = pd.DataFrame(filas).T
         for p in modelables:
@@ -161,6 +171,8 @@ def main():
         "metricas_prueba": {"por_plato": mp, "total_semanal": mt},
         "rango_datos": {"desde": str(semanas[0].date()), "hasta": str(ultima.date())},
         "fecha_calculo": pd.Timestamp.now().strftime("%Y-%m-%d %H:%M"),
+        "nota_recarga": ("Al cargar un archivo nuevo, el navegador recalcula con XGBoost; las proyecciones originales usan el modelo vigente."
+                         if vigente["nombre"] == "LSTM" else None),
         "frases": {
             "MAE": f"En promedio, la proyección se aleja {mp['MAE']:.2f} unidades por plato y semana.",
             "RMSE": f"Los errores grandes pesan más: el desvío típico es de {mp['RMSE']:.2f} unidades por plato y semana.",
@@ -185,7 +197,7 @@ def main():
     # Fixture de paridad de la serie (para verificar preparacion.ts)
     dump("serie_paridad.json", {"semanas": [str(s.date()) for s in semanas],
          "u": {p: g.sort_values("semana")["unidades"].tolist() for p, g in serie.groupby("plato")},
-         "estados": estados.to_dict(), "proy": proy,
+         "estados": estados.to_dict(), "proy": proy, "filas_siguiente": filas_fx,
          "clasif_hist": {r["plato"]: r["categoria_menu"] for r in filas_menu(hist)},
          "clasif_proy": {r["plato"]: r["categoria_menu"] for r in filas_menu(pro)},
          "reparto": {p["plato"]: p["reparto_diario"] for p in plist if p["reparto_diario"]}}, FIXT)

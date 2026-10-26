@@ -59,11 +59,13 @@ export interface Confiabilidad {
   metricas_prueba: { por_plato: Metricas; total_semanal: Metricas };
   rango_datos: { desde: string; hasta: string };
   fecha_calculo: string;
+  nota_recarga?: string | null;
   frases: { MAE: string; RMSE: string; SMAPE: string; total: string };
 }
 
 export interface ModeloMeta {
   vigente: "base" | "xgboost";
+  modelo_vigente?: string;
   columnas: string[]; platos: string[]; categorias: string[];
   objetivo: "reg:squarederror" | "reg:tweedie";
   base_score: number; n_arboles: number; semana_proyectada: string;

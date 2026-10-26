@@ -10,6 +10,7 @@ import numpy as np
 import pandas as pd
 
 from .evaluacion import metricas
+from .modelos import lstm as lm
 from .modelos import xgboost_modelo as xm
 from .modelos.base import predecir_base
 from .preparacion import COLUMNAS_BASE, matriz_modelo, preparar
@@ -32,7 +33,7 @@ def datos_modelo():
     X = matriz_modelo(var[var.plato.isin(modelables)], modelables, cats)
     columnas = COLUMNAS_BASE + [f"plato_{p}" for p in modelables] + [f"cat_{c}" for c in cats]
     X = X[X["idx_semana"] >= 4].reset_index(drop=True)  # sin rezagos completos: se excluyen
-    return validos, serie, estados, X, columnas, modelables, cats
+    return validos, serie, estados, X, columnas, modelables, cats, var
 
 
 def evaluar(df, pred):
@@ -45,7 +46,7 @@ def evaluar(df, pred):
 def main():
     RES.mkdir(exist_ok=True)
     MOD.mkdir(exist_ok=True)
-    validos, serie, estados, X, cols, modelables, cats = datos_modelo()
+    validos, serie, estados, X, cols, modelables, cats, var = datos_modelo()
     tr = X[X.conjunto == "entrenamiento"]
     va = X[X.conjunto == "validacion"]
     te = X[X.conjunto == "prueba"]
@@ -63,6 +64,11 @@ def main():
         "Modelo base (mm4)": {"validacion": predecir_base(va), "prueba": predecir_base(te)},
         "XGBoost": {"validacion": clip(m_val.predict(va[cols])), "prueba": clip(m_fin.predict(te[cols]))},
     }
+    # LSTM (fase E): ajuste en validación; mismas filas de evaluación que los otros modelos
+    ls = lm.buscar_y_evaluar(var, modelables, cats, MOD / "lstm")
+    pd.DataFrame(ls["busqueda"]).sort_values("mae_val").to_csv(RES / "busqueda_lstm.csv", index=False)
+    alinear = lambda df, d: np.array([d[(p, s)] for p, s in zip(df.plato, df.semana)])
+    preds["LSTM"] = {"validacion": alinear(va, ls["val"]), "prueba": alinear(te, ls["prueba"])}
     sets = {"validacion": va, "prueba": te}
     metr = {m: {c: evaluar(sets[c], p[c]) for c in sets} for m, p in preds.items()}
 
@@ -73,13 +79,17 @@ def main():
 
     # Selección del modelo vigente (CA-07): menor MAE por plato en validación.
     vigente = min(metr, key=lambda m: metr[m]["validacion"]["por_plato"]["MAE"])
-    xgb_ok = metr["XGBoost"]["prueba"]["por_plato"]
-    base_ok = metr["Modelo base (mm4)"]["prueba"]["por_plato"]
-    mejores = sum(xgb_ok[k] < base_ok[k] for k in xgb_ok)
+    base_ok = metr["Modelo base (mm4)"]["prueba"]
+    criterio = {}
+    for m in metr:  # criterio de éxito: menor error que el base en al menos 2 de 3 métricas (prueba)
+        n_pl = sum(metr[m]["prueba"]["por_plato"][k] < base_ok["por_plato"][k] for k in base_ok["por_plato"])
+        n_tot = sum(metr[m]["prueba"]["total_semanal"][k] < base_ok["total_semanal"][k] for k in base_ok["total_semanal"])
+        criterio[m] = {"por_plato_n_de_3": int(n_pl), "total_semanal_n_de_3": int(n_tot)}
+    hip = {"XGBoost": params, "LSTM": ls["config"]}.get(vigente, {})
     (MOD / "modelo_vigente.json").write_text(json.dumps({
-        "nombre": vigente, "hiperparametros": params if vigente == "XGBoost" else {},
-        "n_arboles": n_arb, "metricas": metr[vigente],
-        "criterio_exito_xgb_mejor_en_n_de_3_metricas_prueba": int(mejores)}, indent=2, ensure_ascii=False))
+        "nombre": vigente, "hiperparametros": hip, "n_arboles_xgb": n_arb, "metricas": metr[vigente],
+        "criterio_exito_vs_base": criterio}, indent=2, ensure_ascii=False))
+    mejores = criterio["XGBoost"]["por_plato_n_de_3"]
     m_fin.save_model(MOD / "xgb.json")
     (MOD / "xgb_config.json").write_text(json.dumps({"params": params, "n_arboles": n_arb}, indent=2))
 
@@ -87,7 +97,7 @@ def main():
     figuras(preds, sets, m_fin, cols)
     versiones()
     print(json.dumps(metr, indent=2))
-    print("Vigente:", vigente, "| XGBoost mejor en", mejores, "de 3 métricas (prueba, por plato)")
+    print("Vigente:", vigente, "| criterio de éxito vs base:", json.dumps(criterio))
 
 
 def tablas(metr, params, n_arb, res):

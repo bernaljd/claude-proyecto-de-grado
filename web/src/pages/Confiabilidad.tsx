@@ -23,6 +23,7 @@ export default function Confiabilidad() {
         <Tarjeta titulo="RMSE" valor={`${num(t.RMSE, 2)} unidades`} />
         <Tarjeta titulo="SMAPE" valor={`${num(t.SMAPE, 1)} %`} />
       </div>
+      {c.nota_recarga && <p className="aviso">{c.nota_recarga}</p>}
       {datos!.origen === "archivo" && (
         <p className="aviso">Estas métricas son las del entrenamiento original; al cargar un archivo nuevo el modelo no se reentrena.</p>
       )}

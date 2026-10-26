@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import type { Datos, ModeloMeta } from "../types";
 import { clasificar } from "./ingenieriaMenu";
-import { calcularTodo } from "./pipeline";
+import { calcularTodo, filaSiguiente } from "./pipeline";
 import { construirSerie, leerCsv } from "./preparacion";
 import { mayorResiduo } from "./repartoDiario";
 import { cargarModelo, predecir } from "./xgboost";
@@ -39,6 +39,12 @@ describe("Preparación del CSV", () => {
     expect(serie.semanas).toEqual(fx.semanas);
     for (const [p, u] of Object.entries(fx.u)) expect(serie.platos[p].u).toEqual(u);
     for (const [p, e] of Object.entries(fx.estados)) expect(serie.platos[p].estado).toBe(e);
+  });
+  it("las variables de la semana siguiente coinciden con Python (rezagos, mm4, calendario, precio)", () => {
+    for (const [p, v] of Object.entries(fx.filas_siguiente as Record<string, { fila: Record<string, number>; precio: number }>)) {
+      const f = filaSiguiente(serie.platos[p].u, v.precio, meta.semana_proyectada);
+      for (const [k, esperado] of Object.entries(v.fila)) expect(f[k]).toBeCloseTo(esperado, 9);
+    }
   });
   it("nombra el campo faltante", () => {
     const r = leerCsv("Date,Category\n01/01/2023,X\n");
