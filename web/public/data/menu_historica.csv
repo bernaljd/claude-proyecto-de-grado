@@ -1,0 +1,39 @@
+plato,categoria,unidades,precio,costo,margen,popularidad,categoria_menu,accion
+African Coke,DRINKS,1,3.0,1.05,1.95,0.006329113924050633,Perro,Evaluar retirarlo o reemplazarlo.
+Assorted Meat,EXTRAS,2,3.0,1.05,1.95,0.012658227848101266,Perro,Evaluar retirarlo o reemplazarlo.
+Assorted Meat Pepper Soup,APETISERS,3,10.0,3.5,6.5,0.0189873417721519,Estrella,"Mantener precio, porción y visibilidad en la carta."
+Assorted Meat Stew,EXTRAS,1,10.0,3.5,6.5,0.006329113924050633,Puzzle,"Promoverlo, reubicarlo en la carta o recomendarlo en el servicio."
+Asun goat meat,APETISERS,1,11.5,4.02,7.48,0.006329113924050633,Puzzle,"Promoverlo, reubicarlo en la carta o recomendarlo en el servicio."
+Ayamase Sauce,EXTRAS,1,8.5,2.97,5.529999999999999,0.006329113924050633,Puzzle,"Promoverlo, reubicarlo en la carta o recomendarlo en el servicio."
+Beef Stew,EXTRAS,3,8.5,2.973333333333334,5.5266666666666655,0.0189873417721519,Estrella,"Mantener precio, porción y visibilidad en la carta."
+Beef Suya,APETISERS,3,10.0,3.5,6.5,0.0189873417721519,Estrella,"Mantener precio, porción y visibilidad en la carta."
+Boiled Rice,EXTRAS,2,2.5,0.875,1.625,0.012658227848101266,Perro,Evaluar retirarlo o reemplazarlo.
+Boiled Rice with Designer Stew - Ayamase,MAIN COURSES,12,9.5,3.3233333333333337,6.176666666666666,0.0759493670886076,Estrella,"Mantener precio, porción y visibilidad en la carta."
+Buns,APETISERS,2,5.0,1.75,3.25,0.012658227848101266,Perro,Evaluar retirarlo o reemplazarlo.
+Chicken Suya,APETISERS,5,6.0,2.1,3.9,0.03164556962025317,Caballo de arado,"Revisar el precio o la porción, o combinarlo con platos de mayor margen."
+Chin Chin,APETISERS,6,2.0,0.7000000000000001,1.2999999999999998,0.0379746835443038,Caballo de arado,"Revisar el precio o la porción, o combinarlo con platos de mayor margen."
+Coke 330ml,DRINKS,2,1.0,0.35,0.65,0.012658227848101266,Perro,Evaluar retirarlo o reemplazarlo.
+Coleslaw,EXTRAS,1,1.0,0.35,0.65,0.006329113924050633,Perro,Evaluar retirarlo o reemplazarlo.
+Efo Riro,SOUPS,13,9.423846153846153,3.2961538461538464,6.127692307692307,0.08227848101265822,Estrella,"Mantener precio, porción y visibilidad en la carta."
+Egusi (Melon Soup),SOUPS,13,9.038461538461538,3.160769230769231,5.877692307692307,0.08227848101265822,Estrella,"Mantener precio, porción y visibilidad en la carta."
+Ewedu & Gbegiri (NEW),SOUPS,1,10.0,3.5,6.5,0.006329113924050633,Puzzle,"Promoverlo, reubicarlo en la carta o recomendarlo en el servicio."
+Fried Fish,EXTRAS,1,3.5,1.22,2.2800000000000002,0.006329113924050633,Perro,Evaluar retirarlo o reemplazarlo.
+Fried Plantain - Dodo,EXTRAS,8,2.5,0.8775000000000001,1.6225,0.05063291139240506,Caballo de arado,"Revisar el precio o la porción, o combinarlo con platos de mayor margen."
+Goat Meat Peppersoup,APETISERS,3,10.5,3.67,6.83,0.0189873417721519,Estrella,"Mantener precio, porción y visibilidad en la carta."
+Jolof,MAIN COURSES,1,10.0,3.5,6.5,0.006329113924050633,Puzzle,"Promoverlo, reubicarlo en la carta o recomendarlo en el servicio."
+Jolof with Beef,MAIN COURSES,7,8.5,2.97,5.529999999999999,0.04430379746835443,Estrella,"Mantener precio, porción y visibilidad en la carta."
+Jolof with Chicken,MAIN COURSES,7,8.5,2.97,5.529999999999999,0.04430379746835443,Estrella,"Mantener precio, porción y visibilidad en la carta."
+Jolof with Curry Goat,MAIN COURSES,3,9.0,3.15,5.85,0.0189873417721519,Estrella,"Mantener precio, porción y visibilidad en la carta."
+Jolof with Fish,MAIN COURSES,3,9.5,3.3233333333333337,6.176666666666666,0.0189873417721519,Estrella,"Mantener precio, porción y visibilidad en la carta."
+Malta Guinness,DRINKS,1,2.5,0.88,1.62,0.006329113924050633,Perro,Evaluar retirarlo o reemplazarlo.
+Maltina,DRINKS,5,2.5,0.8800000000000001,1.6199999999999999,0.03164556962025317,Caballo de arado,"Revisar el precio o la porción, o combinarlo con platos de mayor margen."
+Meat Pie,APETISERS,6,2.5,0.8766666666666666,1.6233333333333335,0.0379746835443038,Caballo de arado,"Revisar el precio o la porción, o combinarlo con platos de mayor margen."
+Moi Moi - Beans Pudding,EXTRAS,19,3.0,1.05,1.95,0.12025316455696203,Caballo de arado,"Revisar el precio o la porción, o combinarlo con platos de mayor margen."
+Ogbono,SOUPS,2,8.5,2.9699999999999998,5.53,0.012658227848101266,Puzzle,"Promoverlo, reubicarlo en la carta o recomendarlo en el servicio."
+Okro,SOUPS,2,7.5,2.62,4.88,0.012658227848101266,Puzzle,"Promoverlo, reubicarlo en la carta o recomendarlo en el servicio."
+Palm Wine,DRINKS,1,5.0,1.75,3.25,0.006329113924050633,Perro,Evaluar retirarlo o reemplazarlo.
+Patty,APETISERS,1,2.5,0.88,1.62,0.006329113924050633,Perro,Evaluar retirarlo o reemplazarlo.
+Plain Jolof,EXTRAS,4,5.5,1.92,3.58,0.02531645569620253,Caballo de arado,"Revisar el precio o la porción, o combinarlo con platos de mayor margen."
+Plantain Chips,APETISERS,1,1.5,0.52,0.98,0.006329113924050633,Perro,Evaluar retirarlo o reemplazarlo.
+Pounded Yam,EXTRAS,10,3.5,1.223,2.277,0.06329113924050633,Caballo de arado,"Revisar el precio o la porción, o combinarlo con platos de mayor margen."
+Semolina (Maize Flour),EXTRAS,1,3.5,1.22,2.2800000000000002,0.006329113924050633,Perro,Evaluar retirarlo o reemplazarlo.

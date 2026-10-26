@@ -1,0 +1,7 @@
+nivel,metrica,valor
+por_plato,MAE,0.4849669962373172
+por_plato,RMSE,0.8347878404578425
+por_plato,SMAPE,117.66748298064428
+total_semanal,MAE,9.515425021831806
+total_semanal,RMSE,11.898231672497475
+total_semanal,SMAPE,61.246781944655126

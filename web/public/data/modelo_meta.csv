@@ -1,0 +1,8 @@
+clave,valor
+vigente,xgboost
+modelo_vigente,LSTM
+objetivo,reg:tweedie
+base_score,0.89226055
+n_arboles,941
+ventana,12
+semana_proyectada,2026-01-05

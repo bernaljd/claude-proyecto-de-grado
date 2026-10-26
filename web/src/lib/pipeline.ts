@@ -1,9 +1,10 @@
 // Flujos F4-F8 en el navegador: predicción, reparto diario e ingeniería de menú sobre la serie.
-import type { Datos, FilaRanking, ModeloMeta, Plato, SerieSemanal } from "../types";
+import type { Datos, FilaRanking, Plato, SerieSemanal } from "../types";
 import { agregarPeriodo, calcularAlertas, clasificar } from "./ingenieriaMenu";
 import { construirSerie, type Venta, participaciones } from "./preparacion";
 import { DIAS, mayorResiduo, pesosPlato } from "./repartoDiario";
-import { predecir, type ModeloXgb } from "./xgboost";
+import type { ModeloCompleto } from "./datosCsv";
+import { predecir } from "./xgboost";
 
 export const SEMANAS_PERIODO = 12;
 const DIA_MS = 86_400_000;
@@ -11,7 +12,7 @@ const DIA_MS = 86_400_000;
 /** Redondeo half-up (igual que redondear() en src/exportar.py). */
 export const redondear = (x: number) => Math.floor(Math.max(x, 0) + 0.5);
 
-function semanaIso(t: number): number {
+export function semanaIso(t: number): number {
   const d = new Date(t);
   const dow = (d.getUTCDay() + 6) % 7;
   const jueves = new Date(t - dow * DIA_MS + 3 * DIA_MS);
@@ -19,46 +20,45 @@ function semanaIso(t: number): number {
   return Math.floor((jueves.getTime() - inicio) / (7 * DIA_MS)) + 1;
 }
 
-/** Variables de la semana siguiente con información hasta t-1 (igual que fila_siguiente en Python). */
-export function filaSiguiente(u: number[], precio: number, semana: string) {
+/** Entradas de la semana siguiente: las últimas V semanas (x_k, p_k, ss_k, sc_k); k = V es la última semana. */
+export function filaVentana(u: number[], precio: number[], semanas: string[], ventana: number): Record<string, number> {
   const f: Record<string, number> = {};
-  for (let k = 1; k <= 4; k++) f[`lag_${k}`] = u[u.length - k];
-  f.mm4 = u.slice(-4).reduce((a, b) => a + b, 0) / 4;
-  const t = Date.parse(semana), w = semanaIso(t);
-  f.sem_sin = Math.sin((2 * Math.PI * w) / 52);
-  f.sem_cos = Math.cos((2 * Math.PI * w) / 52);
-  f.mes = new Date(t).getUTCMonth() + 1;
-  f.precio_prev = precio;
+  const n = u.length;
+  for (let k = 1; k <= ventana; k++) {
+    const j = n - ventana + k - 1;
+    const w = semanaIso(Date.parse(semanas[j]));
+    f[`x_${k}`] = u[j]; f[`p_${k}`] = precio[j];
+    f[`ss_${k}`] = Math.sin((2 * Math.PI * w) / 52); f[`sc_${k}`] = Math.cos((2 * Math.PI * w) / 52);
+  }
   return f;
 }
 
-function ffillPrecio(s: SerieSemanal["platos"][string]): number[] {
+export const media4 = (u: number[]) => u.slice(-4).reduce((a, b) => a + b, 0) / 4;
+
+export function ffillPrecio(s: SerieSemanal["platos"][string]): number[] {
   const p = s.u.map((u, k) => (u > 0 ? s.i[k] / u : NaN));
   for (let k = 1; k < p.length; k++) if (Number.isNaN(p[k])) p[k] = p[k - 1];
   for (let k = p.length - 2; k >= 0; k--) if (Number.isNaN(p[k])) p[k] = p[k + 1];
   return p;
 }
 
-export interface ModeloCompleto { meta: ModeloMeta; xgb?: ModeloXgb }
-
 export function proyectar(serie: SerieSemanal, modelo: ModeloCompleto) {
   const sig = new Date(Date.parse(serie.semanas[serie.semanas.length - 1]) + 7 * DIA_MS).toISOString().slice(0, 10);
   const proy: Record<string, number> = {}, exactas: Record<string, number> = {};
   for (const [p, s] of Object.entries(serie.platos)) {
     if (s.estado === "retirado") continue;
-    const precio = ffillPrecio(s);
-    const f = filaSiguiente(s.u, precio[precio.length - 1], sig);
     let x: number;
     if (s.estado === "historial_insuficiente") {
       const primera = s.u.findIndex((v) => v > 0);
       const disp = s.u.slice(primera).slice(-4);
       x = disp.reduce((a, b) => a + b, 0) / disp.length;
     } else if (modelo.meta.vigente === "xgboost" && modelo.xgb && modelo.meta.platos.includes(p)) {
+      const f = filaVentana(s.u, ffillPrecio(s), serie.semanas, modelo.meta.ventana);
       const fila = modelo.meta.columnas.map((c) =>
         c.startsWith("plato_") ? Number(c === `plato_${p}`)
           : c.startsWith("cat_") ? Number(c === `cat_${s.categoria}`) : f[c]);
       x = Math.max(predecir(modelo.xgb, modelo.meta, fila), 0);
-    } else x = f.mm4;
+    } else x = media4(s.u);
     exactas[p] = x; proy[p] = redondear(x);
   }
   return { proy, exactas, sig };

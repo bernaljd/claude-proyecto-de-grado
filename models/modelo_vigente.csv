@@ -1,0 +1,15 @@
+clave,valor
+nombre,LSTM
+n_arboles_xgb,941
+ventana_xgb,12
+hp_ventana,12
+hp_unidades,64
+hp_dropout,0.0
+hp_epocas,16
+hp_mae_val,0.5896340978801505
+criterio_Modelo base (mm4)_por_plato_n_de_3,0
+criterio_Modelo base (mm4)_total_semanal_n_de_3,0
+criterio_XGBoost_por_plato_n_de_3,1
+criterio_XGBoost_total_semanal_n_de_3,0
+criterio_LSTM_por_plato_n_de_3,2
+criterio_LSTM_total_semanal_n_de_3,2

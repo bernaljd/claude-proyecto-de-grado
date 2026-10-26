@@ -55,7 +55,6 @@ export interface Ranking { ranking: FilaRanking[] }
 export interface Metricas { MAE: number; RMSE: number; SMAPE: number }
 export interface Confiabilidad {
   modelo_vigente: string;
-  hiperparametros: Record<string, unknown>;
   metricas_prueba: { por_plato: Metricas; total_semanal: Metricas };
   rango_datos: { desde: string; hasta: string };
   fecha_calculo: string;
@@ -66,6 +65,7 @@ export interface Confiabilidad {
 export interface ModeloMeta {
   vigente: "base" | "xgboost";
   modelo_vigente?: string;
+  ventana: number;
   columnas: string[]; platos: string[]; categorias: string[];
   objetivo: "reg:squarederror" | "reg:tweedie";
   base_score: number; n_arboles: number; semana_proyectada: string;

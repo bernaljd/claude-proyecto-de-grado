@@ -1,0 +1,10 @@
+clave,valor
+ventana,12
+n_arboles,941
+param_max_depth,6
+param_learning_rate,0.1
+param_subsample,1.0
+param_colsample_bytree,1.0
+param_min_child_weight,1
+param_objective,reg:tweedie
+param_tweedie_variance_power,1.5

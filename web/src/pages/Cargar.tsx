@@ -1,18 +1,12 @@
 import { useState } from "react";
 import { useDatos } from "../datos";
-import { calcularTodo, type ModeloCompleto } from "../lib/pipeline";
+import { calcularTodo } from "../lib/pipeline";
 import { leerCsv } from "../lib/preparacion";
-import { cargarModelo } from "../lib/xgboost";
+import { fuenteRed } from "../lib/csv";
+import { leerModelo } from "../lib/datosCsv";
 import { fecha, num } from "../formato";
-import type { ModeloMeta } from "../types";
 
-const base = import.meta.env.BASE_URL;
-
-async function cargarModeloCompleto(): Promise<ModeloCompleto> {
-  const meta: ModeloMeta = await (await fetch(`${base}data/modelo_meta.json`)).json();
-  if (meta.vigente !== "xgboost") return { meta };
-  return { meta, xgb: cargarModelo(await (await fetch(`${base}data/modelo_xgb.json`)).json()) };
-}
+const fuente = fuenteRed(import.meta.env.BASE_URL);
 
 export default function Cargar() {
   const { datos, guardar, restaurar } = useDatos();
@@ -26,7 +20,7 @@ export default function Cargar() {
     try {
       const lect = leerCsv(await f.text());
       if (lect.errores.length) { setErrores(lect.errores); return; }
-      const nuevo = calcularTodo(lect.ventas, await cargarModeloCompleto(), datos!);
+      const nuevo = calcularTodo(lect.ventas, await leerModelo(fuente), datos!);
       nuevo.resumenCarga = [
         `Registros leídos: ${num(lect.leidos)}`,
         `Registros usados: ${num(lect.ventas.length)}`,

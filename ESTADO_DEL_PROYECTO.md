@@ -4,8 +4,8 @@ Resumen para el equipo de tesis. Rama: `claude/new-session-a151ka`. **Estado: fa
 
 ## 1. Qué es y cómo está armado
 
-- **Python (CRISP-DM):** prepara los datos, entrena y evalúa los modelos, y exporta JSON estáticos. Solo corre en el computador de los autores.
-- **Dashboard (`web/`):** React + Vite + TypeScript, sitio estático sin servidor. Lee los JSON de `web/public/data/` y se publica en Vercel.
+- **Python (CRISP-DM):** prepara los datos, entrena y evalúa los modelos, y exporta tablas CSV estáticas. Solo corre en el computador de los autores.
+- **Dashboard (`web/`):** React + Vite + TypeScript, sitio estático sin servidor. Lee los CSV de `web/public/data/` y se publica en Vercel.
 - **Carga de un CSV nuevo:** se calcula en el navegador y el archivo no sale del equipo. No reentrena el modelo.
 - **Reentrenar:** `python -m src.entrenar` y luego `python -m src.exportar`.
 
@@ -47,7 +47,7 @@ El SMAPE de XGBoost por plato es alto porque predice valores pequeños (por ejem
 - Ambos módulos están escritos dos veces, en Python y en TypeScript, con pruebas de paridad.
 
 ### Fase D: exportación y dashboard
-- `src/exportar.py` genera los JSON y el XGBoost para el navegador (`modelo_xgb.json` y `modelo_meta.json`).
+- `src/exportar.py` genera los CSV y el XGBoost para el navegador (`modelo_xgb_arboles.csv` y `modelo_meta.csv`).
 - 7 vistas: Inicio, Demanda por plato, Ingeniería de menú (con matriz), Detalle del plato, Alertas, Cargar datos y Confiabilidad.
 - Es responsive: barra lateral en computador y barra inferior en celular.
 - `web/vercel.json` ya redirige las rutas al SPA.
@@ -112,8 +112,15 @@ Las fases A a F del prompt están completas. El detalle final está en `RESULTAD
 |---|---|
 | `src/` | Python: ingesta, preparación, modelos, evaluación, ingeniería de menú, proyección diaria, entrenar y exportar |
 | `tests/` | pytest |
-| `results/` | métricas (json y csv), tablas `.tex`, figuras, búsqueda de hiperparámetros, versiones y capturas |
-| `models/` | `modelo_vigente.json`, `xgb.json` y `xgb_config.json` |
-| `web/` | dashboard React (`src/lib/` tiene la lógica; `public/data/` los JSON exportados) |
+| `results/` | métricas (csv), tablas `.tex`, figuras, búsqueda de hiperparámetros, versiones y capturas |
+| `models/` | `modelo_vigente.csv`, `xgb_config.csv`, `xgb.ubj` y `lstm/` |
+| `web/` | dashboard React (`src/lib/` tiene la lógica; `public/data/` los CSV exportados) |
 | `scripts/verificar_web.cjs` | verificación de RNF-03 y RNF-04 con Playwright |
 | `README.md`, `RESULTADOS.md` | instrucciones y resultados parciales |
+
+## Actualización: datos en CSV y XGBoost con ventaneo
+
+- **CSV en lugar de JSON:** todo lo que intercambian Python y la web ahora son tablas CSV (`web/public/data/`, `models/*.csv`, fixtures de prueba). El XGBoost del navegador se exporta como tabla de nodos (`modelo_xgb_arboles.csv`).
+- **XGBoost en igualdad de condiciones con la LSTM:** misma ventana (se probaron 4, 8 y 12 semanas; ganó 12), mismas entradas por paso y mismas filas de evaluación. Su MAE por plato en prueba bajó a **0,432** (el más bajo), pero su RMSE y el total semanal siguen peores que los del modelo base, así que no cumple el criterio de éxito.
+- **Modelo vigente:** sigue siendo la LSTM, elegida por validación (MAE 0,590 frente a 0,611 de XGBoost).
+- Pruebas: `pytest` 14 y `vitest` 8, todas pasan; 21 de 21 verificaciones de Playwright.

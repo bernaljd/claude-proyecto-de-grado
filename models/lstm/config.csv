@@ -1,0 +1,9 @@
+clave,valor
+ventana,12
+unidades,64
+dropout,0.0
+epocas,16
+mae_val,0.5896340978801505
+umax,21.0
+pmin,0.0
+pmax,12.0

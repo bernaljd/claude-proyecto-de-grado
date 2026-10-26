@@ -1,31 +1,32 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import type { Datos, ModeloMeta } from "../types";
+import { type Fila, filas, type Fuente } from "./csv";
+import { leerDatos, leerModelo } from "./datosCsv";
 import { clasificar } from "./ingenieriaMenu";
-import { calcularTodo, filaSiguiente } from "./pipeline";
+import { calcularTodo, ffillPrecio, filaVentana } from "./pipeline";
 import { construirSerie, leerCsv } from "./preparacion";
 import { mayorResiduo } from "./repartoDiario";
-import { cargarModelo, predecir } from "./xgboost";
+import { predecir } from "./xgboost";
 
-const J = (r: string) => JSON.parse(readFileSync(new URL(r, import.meta.url), "utf-8"));
-const datos = (n: string) => J(`../../public/data/${n}.json`);
-const meta: ModeloMeta = datos("modelo_meta");
-const csv = readFileSync(new URL("../../../data/raw/Anonymized_Restaurant_Sales_Data.csv", import.meta.url), "utf-8");
-const fx = J("./__fixtures__/serie_paridad.json");
+const leer = (r: string) => readFileSync(new URL(r, import.meta.url), "utf-8");
+const fuente: Fuente = { texto: async (n) => leer(`../../public/data/${n}`) };
+const csvVentas = leer("../../../data/raw/Anonymized_Restaurant_Sales_Data.csv");
+const ABREV = ["lun", "mar", "mie", "jue", "vie", "sab"];
 
-describe("XGBoost en el navegador", () => {
-  it("coincide con Python (diferencia < 1e-4 en 200 filas)", () => {
-    const f = J("./__fixtures__/paridad.json");
-    const m = cargarModelo(datos("modelo_xgb"));
-    expect(f.filas.length).toBe(200);
-    f.filas.forEach((fila: number[], i: number) => {
-      expect(Math.abs(predecir(m, meta, fila) - f.predicciones[i])).toBeLessThan(1e-4);
-    });
+describe("XGBoost en el navegador (tabla de nodos en CSV)", () => {
+  it("coincide con Python (diferencia < 1e-4 en 200 filas)", async () => {
+    const { meta, xgb } = await leerModelo(fuente);
+    const f = filas<Fila>(leer("./__fixtures__/paridad_xgb.csv"));
+    expect(f.length).toBe(200);
+    for (const fila of f) {
+      const x = meta.columnas.map((c) => Number(fila[c]));
+      expect(Math.abs(predecir(xgb!, meta, x) - Number(fila.prediccion))).toBeLessThan(1e-4);
+    }
   });
 });
 
 describe("Preparación del CSV", () => {
-  const lect = leerCsv(csv);
+  const lect = leerCsv(csvVentas);
   const serie = construirSerie(lect.ventas);
   it("reproduce los hechos verificados", () => {
     expect(lect.leidos).toBe(4385);
@@ -35,35 +36,37 @@ describe("Preparación del CSV", () => {
     expect(Object.keys(serie.platos).length).toBe(62);
     expect(Object.values(serie.platos).reduce((a, s) => a + s.u.reduce((x, y) => x + y, 0), 0)).toBe(7118);
   });
-  it("la serie y los estados coinciden con Python", () => {
-    expect(serie.semanas).toEqual(fx.semanas);
-    for (const [p, u] of Object.entries(fx.u)) expect(serie.platos[p].u).toEqual(u);
-    for (const [p, e] of Object.entries(fx.estados)) expect(serie.platos[p].estado).toBe(e);
-  });
-  it("las variables de la semana siguiente coinciden con Python (rezagos, mm4, calendario, precio)", () => {
-    for (const [p, v] of Object.entries(fx.filas_siguiente as Record<string, { fila: Record<string, number>; precio: number }>)) {
-      const f = filaSiguiente(serie.platos[p].u, v.precio, meta.semana_proyectada);
-      for (const [k, esperado] of Object.entries(v.fila)) expect(f[k]).toBeCloseTo(esperado, 9);
-    }
+  it("la serie y los estados coinciden con los CSV de Python (data/processed)", () => {
+    const idx = new Map(serie.semanas.map((w, i) => [w, i]));
+    const py = filas<{ plato: string; semana: string; unidades: number }>(leer("../../../data/processed/serie_semanal.csv"));
+    expect(py.length).toBe(9734);
+    for (const r of py) expect(serie.platos[r.plato].u[idx.get(r.semana)!]).toBe(r.unidades);
+    for (const e of filas<{ plato: string; estado: string }>(leer("../../../data/processed/estados_platos.csv")))
+      expect(serie.platos[e.plato].estado).toBe(e.estado);
   });
   it("nombra el campo faltante", () => {
-    const r = leerCsv("Date,Category\n01/01/2023,X\n");
-    expect(r.errores.join(" ")).toContain("«Quantity»");
+    expect(leerCsv("Date,Category\n01/01/2023,X\n").errores.join(" ")).toContain("«Quantity»");
   });
-  it("la proyección, el reparto y la clasificación coinciden con Python", () => {
-    const base: Datos = {
-      resumen: datos("resumen"), platos: datos("platos"), serie: datos("serie_semanal"), menu: datos("ingenieria_menu"),
-      ranking: datos("ranking"), confiabilidad: datos("confiabilidad"), origen: "original",
-    };
-    const r = calcularTodo(lect.ventas, { meta, xgb: cargarModelo(datos("modelo_xgb")) }, base);
-    for (const p of r.platos.platos) {
-      if (p.proyeccion !== null) expect(p.proyeccion).toBe(fx.proy[p.plato]);
-      if (p.reparto_diario) expect(p.reparto_diario).toEqual(fx.reparto[p.plato]);
+  it("las entradas, la proyección, el reparto y la clasificación coinciden con Python", async () => {
+    const modelo = await leerModelo(fuente);
+    const base = await leerDatos(fuente);
+    const r = calcularTodo(lect.ventas, modelo, base);
+    const fx = filas<Fila>(leer("./__fixtures__/paridad_navegador.csv"));
+    const hist = Object.fromEntries(r.menu.historica.platos.map((f) => [f.plato, f.categoria_menu]));
+    const proy = Object.fromEntries(r.menu.proyectada.platos.map((f) => [f.plato, f.categoria_menu]));
+    const sp = r.platos.platos;
+    for (const f of fx) {
+      const p = String(f.plato), plato = sp.find((x) => x.plato === p)!;
+      expect(plato.proyeccion).toBe(f.proy_nav);
+      expect(plato.reparto_diario).toEqual(ABREV.map((a) => f[`rep_${a}`]));
+      expect(hist[p] ?? "").toBe(f.cat_hist ?? "");
+      expect(proy[p] ?? "").toBe(f.cat_proy_nav ?? "");
+      if (f.estado === "modelable") {
+        const s = serie.platos[p];
+        const w = filaVentana(s.u, ffillPrecio(s), serie.semanas, modelo.meta.ventana);
+        for (const [k, v] of Object.entries(w)) expect(v).toBeCloseTo(Number(f[`f_${k}`]), 9);
+      }
     }
-    const h = Object.fromEntries(r.menu.historica.platos.map((f) => [f.plato, f.categoria_menu]));
-    const q = Object.fromEntries(r.menu.proyectada.platos.map((f) => [f.plato, f.categoria_menu]));
-    expect(h).toEqual(fx.clasif_hist);
-    expect(q).toEqual(fx.clasif_proy);
   });
 });
 
@@ -77,17 +80,15 @@ describe("Ingeniería de menú", () => {
       { plato: "D", categoria: "x", unidades: 10, precio: 3, costo: 2 },
     ]);
     expect(umbrales.margen_ponderado).toBeCloseTo(4.1, 10);
-    const c = Object.fromEntries(platos.map((f) => [f.plato, f.categoria_menu]));
-    expect(c).toEqual({ A: "Estrella", B: "Caballo de arado", C: "Estrella", D: "Perro" });
+    expect(Object.fromEntries(platos.map((f) => [f.plato, f.categoria_menu]))).toEqual(
+      { A: "Estrella", B: "Caballo de arado", C: "Estrella", D: "Perro" });
   });
-  it("caso de referencia: los 12 platos más vendidos", () => {
-    const s = datos("serie_semanal");
-    const e = Object.entries(s.platos as Record<string, { categoria: string; u: number[]; i: number[]; c: number[] }>)
-      .map(([plato, x]) => {
-        const u = x.u.reduce((a, b) => a + b, 0);
-        return { plato, categoria: x.categoria, unidades: u, precio: x.i.reduce((a, b) => a + b, 0) / u,
-          costo: x.c.reduce((a, b) => a + b, 0) / u };
-      }).sort((a, b) => b.unidades - a.unidades).slice(0, 12);
+  it("caso de referencia: los 12 platos más vendidos", async () => {
+    const s = (await leerDatos(fuente)).serie;
+    const e = Object.entries(s.platos).map(([plato, x]) => {
+      const u = x.u.reduce((a, b) => a + b, 0);
+      return { plato, categoria: x.categoria, unidades: u, precio: x.i.reduce((a, b) => a + b, 0) / u, costo: x.c.reduce((a, b) => a + b, 0) / u };
+    }).sort((a, b) => b.unidades - a.unidades).slice(0, 12);
     const { platos, umbrales } = clasificar(e);
     expect(umbrales.margen_ponderado).toBeCloseTo(3.36, 2);
     expect(umbrales.umbral_popularidad * 100).toBeCloseTo(5.83, 2);

@@ -1,0 +1,100 @@
+orden,columna
+0,x_1
+1,p_1
+2,ss_1
+3,sc_1
+4,x_2
+5,p_2
+6,ss_2
+7,sc_2
+8,x_3
+9,p_3
+10,ss_3
+11,sc_3
+12,x_4
+13,p_4
+14,ss_4
+15,sc_4
+16,x_5
+17,p_5
+18,ss_5
+19,sc_5
+20,x_6
+21,p_6
+22,ss_6
+23,sc_6
+24,x_7
+25,p_7
+26,ss_7
+27,sc_7
+28,x_8
+29,p_8
+30,ss_8
+31,sc_8
+32,x_9
+33,p_9
+34,ss_9
+35,sc_9
+36,x_10
+37,p_10
+38,ss_10
+39,sc_10
+40,x_11
+41,p_11
+42,ss_11
+43,sc_11
+44,x_12
+45,p_12
+46,ss_12
+47,sc_12
+48,plato_African Coke
+49,plato_Amala (Dried Yam Flour)
+50,plato_Assorted Meat
+51,plato_Assorted Meat Pepper Soup
+52,plato_Assorted Meat Stew
+53,plato_Ayamase Sauce
+54,plato_Beans
+55,plato_Beef Stew
+56,plato_Beef Suya
+57,plato_Boiled Rice
+58,plato_Boiled Rice with Designer Stew - Ayamase
+59,plato_Bottle Water
+60,plato_Buns
+61,plato_Chicken Stew
+62,plato_Chicken Suya
+63,plato_Chin Chin
+64,plato_Coke 330ml
+65,plato_Coleslaw
+66,plato_Efo Riro
+67,plato_Egusi (Melon Soup)
+68,plato_Ewedu & Gbegiri (NEW)
+69,plato_Extra Stew
+70,plato_Fried Fish
+71,plato_Fried Plantain - Dodo
+72,plato_Fried Rice
+73,plato_Gari (Dried Cassava Flour)
+74,plato_Jolof
+75,plato_Jolof with Beef
+76,plato_Jolof with Chicken
+77,plato_Jolof with Curry Goat
+78,plato_Jolof with Fish
+79,plato_Malta Guinness
+80,plato_Maltina
+81,plato_Meat Pie
+82,plato_Moi Moi - Beans Pudding
+83,plato_Ogbono
+84,plato_Okro
+85,plato_Palm Wine
+86,plato_Patty
+87,plato_Plain Fried Rice
+88,plato_Plain Jolof
+89,plato_Plantain Chips
+90,plato_Pounded Yam
+91,plato_Semolina (Maize Flour)
+92,plato_Stewed Fried Fish
+93,cat_APETISERS
+94,cat_DRINKS
+95,cat_EXTRAS
+96,cat_MAIN COURSES
+97,cat_SOUPS
+98,cat_SPECIAL ORDERS

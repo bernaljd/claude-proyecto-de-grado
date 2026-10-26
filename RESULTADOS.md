@@ -9,27 +9,28 @@ Todas las cifras salen de ejecutar el código sobre `data/raw/Anonymized_Restaur
 |---|---|
 | **OE2** flujos de información entre ingesta, predicción, ingeniería de menú y visualización | `src/ingesta.py`, `src/preparacion.py`, `src/exportar.py` (Python) y `web/src/lib/preparacion.ts`, `web/src/lib/pipeline.ts` (navegador): flujos F1–F9. Pruebas de paridad Python ↔ navegador en `web/src/lib/lib.test.ts` |
 | **OE3** modelos de predicción con datos reales | `src/modelos/base.py`, `xgboost_modelo.py`, `lstm.py`; búsquedas en `results/busqueda_xgb.csv` (144 combinaciones) y `results/busqueda_lstm.csv` (27); modelos en `models/` |
-| **OE4** desempeño con MAE, RMSE y SMAPE | `src/evaluacion.py`, `results/metricas.json` / `.csv`, `results/tabla_resultados.tex`, figuras `results/fig_*.png` |
-| **Objetivo general** DSS con predicción + ingeniería de menú, evaluado con métricas | Dashboard `web/` (7 vistas), `src/ingenieria_menu.py` y `web/src/lib/ingenieriaMenu.ts`, `models/modelo_vigente.json` |
+| **OE4** desempeño con MAE, RMSE y SMAPE | `src/evaluacion.py`, `results/metricas.csv`, `results/tabla_resultados.tex`, figuras `results/fig_*.png` |
+| **Objetivo general** DSS con predicción + ingeniería de menú, evaluado con métricas | Dashboard `web/` (7 vistas), `src/ingenieria_menu.py` y `web/src/lib/ingenieriaMenu.ts`, `models/modelo_vigente.csv` |
 
 ## 2. Valores para la tesis
 
-**Filas de entrenamiento.** XGBoost y modelo base: **4.545** (101 semanas × 45 platos, tras quitar las 4 primeras semanas sin rezagos).
-LSTM (ventana de 12 semanas): 4.185 filas de entrenamiento.
+**Filas de entrenamiento.** Modelo base: **4.545** (101 semanas × 45 platos, tras quitar las 4 primeras semanas sin rezagos).
+XGBoost y LSTM, ambos con ventana de 12 semanas: **4.185** (93 semanas × 45 platos, porque cada fila necesita 12 semanas previas).
 
-**Cuadro 6.2: XGBoost** (`results/tabla_config_xgb.tex`)
+**Cuadro 6.2: XGBoost** (`results/tabla_config_xgb.tex`). XGBoost recibe ahora las mismas entradas que la LSTM: las 12 semanas previas con unidades, precio y seno/coseno de la semana por paso, más el plato y la categoría (`dataset_ventaneado` y `src/ventaneo.py`). Se eligió la ventana en validación: 4 semanas → MAE 0,684; 8 → 0,640; 12 → 0,611.
 
 | Hiperparámetro | Valores explorados | Valor elegido |
 |---|---|---|
 | objective | reg:squarederror, reg:tweedie | reg:tweedie |
 | tweedie_variance_power | 1,2; 1,5 | 1,5 |
-| n_estimators | hasta 1.000 (parada temprana 50) | 99 |
+| n_estimators | hasta 1.000 (parada temprana 50) | 941 |
 | max_depth | 3, 4, 6 | 6 |
 | learning_rate | 0,03; 0,1 | 0,1 |
-| subsample | 0,8; 1,0 | 0,8 |
-| colsample_bytree | 0,8; 1,0 | 0,8 |
+| subsample | 0,8; 1,0 | 1,0 |
+| colsample_bytree | 0,8; 1,0 | 1,0 |
 | min_child_weight | 1, 5 | 1 |
 | random_state | 42 | 42 |
+| **ventana (semanas)** | 4, 8, 12 | **12** |
 
 **Configuración final de la LSTM** (PyTorch, una capa LSTM, dropout, capa densa, Adam lr 1e-3, pérdida MSE, lotes de 64, parada temprana con paciencia 15, semilla 42, variables escaladas a [0, 1] con parámetros de entrenamiento).
 
@@ -48,16 +49,16 @@ Nota: la configuración de referencia de la tesis (ventana 8, 32 unidades) dio M
 |---|---|---|---|---|---|---|
 | | *por plato y semana* | | | *demanda total semanal* | | |
 | Base (mm4) | 0,500 | 0,871 | 102,57 | 9,519 | 11,726 | 62,50 |
-| XGBoost | 0,558 | 0,841 | 176,24 | 9,848 | 12,358 | 59,43 |
+| XGBoost (ventana 12) | **0,432** | 0,878 | 189,94 | 10,687 | 13,967 | 79,23 |
 | **LSTM (vigente)** | **0,485** | **0,835** | 117,67 | **9,515** | 11,898 | 61,25 |
 
-Métricas de validación (MAE por plato): base 0,639; XGBoost 0,699; LSTM 0,590. Detalle completo en `results/metricas.csv`.
+Métricas de validación (MAE por plato): base 0,639; XGBoost 0,611; LSTM 0,590. Detalle completo en `results/metricas.csv`.
 
 **Criterio de éxito** (menor error que el base en ≥ 2 de 3 métricas, en prueba):
 - LSTM: por plato mejora MAE y RMSE (2 de 3); en el total semanal mejora MAE y SMAPE (2 de 3). **Cumple.**
-- XGBoost: 1 de 3 en ambos niveles. **No cumple.**
+- XGBoost (ventana 12): por plato mejora solo el MAE (1 de 3) y en el total semanal no mejora ninguna (0 de 3). **No cumple**, aunque su MAE por plato en prueba (0,432) es el más bajo de los tres.
 
-**Modelo vigente (CA-07):** LSTM, por tener el menor MAE por plato en validación (`models/modelo_vigente.json`).
+**Modelo vigente (CA-07):** LSTM, por tener el menor MAE por plato en validación (`models/modelo_vigente.csv`).
 
 **Versiones:** `results/versions.txt` (Python 3.13.17, pandas 3.0.5, numpy 2.5.3, xgboost 3.4.1, scikit-learn 1.9.1, matplotlib 3.11.2, pyarrow 26.0.0, torch 2.14.1, pytest 9.1.1; Node 22, Vite 5, React 18, vitest 2).
 
@@ -70,14 +71,14 @@ Métricas de validación (MAE por plato): base 0,639; XGBoost 0,699; LSTM 0,590.
 | `ventas_depuradas.parquet` | Registros válidos (sin cancelados) |
 | `serie_semanal.csv` / `.parquet` | Tabla larga `plato, semana, unidades` (más precio, ingreso y costo), con ceros: 157 semanas × 62 platos |
 | `estados_platos.csv` | Modelable, historial insuficiente o retirado |
-| `dataset_modelado.csv` | Variables de XGBoost y del modelo base (rezagos, media móvil, calendario, precio) y conjunto |
+| `dataset_modelado.csv` | Variables del modelo base (rezagos, media móvil, calendario, precio) y conjunto |
 | `dataset_ventaneado_V4.csv`, `_V12.csv` | **Ventaneo**: una fila por plato y semana objetivo con `x_1 … x_V` (las V semanas previas) e `y` (unidades de la semana objetivo), y el conjunto |
 
 Ejemplo con ventana V = 3 sobre un plato con ventas 20, 25, 5, 20, 30, 40: las filas son `(20, 25, 5 → 20)`, `(25, 5, 20 → 30)` y `(5, 20, 30 → 40)`. Hay una prueba que lo verifica (`test_ventaneo_a_mano`).
 
 Cada modelo usa el ventaneo así:
-- **Modelo base y XGBoost:** ventana de 4 semanas (`lag_1 … lag_4` equivalen a `x_4 … x_1`; hay una prueba de que coinciden) más media móvil, calendario y precio.
-- **LSTM:** ventana deslizante de 12 semanas (la elegida en validación), donde cada paso trae unidades, precio y calendario.
+- **Modelo base:** media de las 4 semanas previas (`lag_1 … lag_4` equivalen a `x_4 … x_1`; hay una prueba de que coinciden).
+- **XGBoost y LSTM, en igualdad de condiciones:** la misma ventana deslizante (se prueban 4, 8 y 12 semanas en validación; ganó 12 en ambos) con las mismas entradas por paso (unidades, precio y seno/coseno de la semana) y el plato y la categoría como variables 0/1. XGBoost recibe la ventana aplanada en columnas (`x_1 … x_12`, `p_1 …`, `ss_1 …`, `sc_1 …`) y la LSTM la recibe como secuencia (`src/ventaneo.py`, `src/modelos/lstm.py`).
 - La partición en entrenamiento, validación y prueba se hace por la fecha de la semana objetivo, así que ninguna ventana usa información de la semana que predice ni de las posteriores.
 
 ## 3. Validación funcional
@@ -104,16 +105,26 @@ Cada modelo usa el ventaneo así:
 | Accesibilidad básica | Contraste calculado (mín. 4,83:1), `label` en campos, botones y enlaces reales, áreas táctiles de 44 px por CSS | Cumple (no se usó una herramienta externa de auditoría) | `web/src/estilos.css` |
 | Restricción tecnológica: sitio estático sin servidor | `npm run build` genera `web/dist`; `vercel.json` con rewrites | Cumple en local. **El despliegue en Vercel no se ejecutó desde este entorno** | README |
 
-Pruebas automáticas: `pytest` 11 pasan; `vitest` 9 pasan (paridad del XGBoost en 200 filas con diferencia < 1e-4, serie, estados, variables de la semana siguiente, proyección, reparto y clasificación).
+Pruebas automáticas: `pytest` 14 pasan; `vitest` 8 pasan (paridad del XGBoost en 200 filas con diferencia < 1e-4, serie, estados, variables de la semana siguiente, proyección, reparto y clasificación).
+
+## Formato de los datos del dashboard: CSV
+
+Todo lo que intercambian Python y la web son tablas CSV en `web/public/data/` (UTF-8, una fila por registro), legibles en Excel:
+`resumen.csv`, `platos.csv`, `serie_semanal.csv`, `menu_historica.csv`, `menu_proyectada.csv`, `menu_umbrales.csv`, `menu_alertas.csv`,
+`menu_acciones.csv`, `ranking.csv`, `confiabilidad.csv`, `confiabilidad_metricas.csv`, `modelo_meta.csv`, `modelo_columnas.csv`,
+`modelo_platos.csv`, `modelo_categorias.csv` y `modelo_xgb_arboles.csv` (el XGBoost como tabla de nodos: un renglón por nodo con
+variable, umbral, hijos y valor de la hoja). La configuración de los modelos está en `models/*.csv`. Las pruebas de paridad usan
+`web/src/lib/__fixtures__/*.csv`. Solo quedan JSON de herramientas (`package.json`, `tsconfig.json`, `vercel.json`) y el almacenamiento
+interno del navegador (`localStorage`) al cargar un archivo.
 
 ## 4. Análisis honesto
 
 - **¿Supera la LSTM al modelo base?** Sí, pero por muy poco. El MAE por plato baja de 0,500 a 0,485 (3 %) y el RMSE de 0,871 a 0,835; en el total semanal el MAE es casi idéntico (9,515 frente a 9,519). El SMAPE por plato es peor (117,7 % frente a 102,6 %). Con una sola semilla, un solo conjunto de prueba y diferencias tan pequeñas no se puede afirmar que sea una mejora estable. El criterio de éxito de la tesis se cumple de forma formal, no contundente.
-- **XGBoost no supera al base.** Mejora solo el RMSE por plato y el SMAPE del total. En validación tampoco ganó por MAE.
+- **XGBoost con ventaneo mejoró mucho, pero no cumple el criterio.** Al darle las mismas 12 semanas que a la LSTM, su MAE por plato en prueba bajó de 0,558 a 0,432, el más bajo de los tres. Sin embargo su RMSE (0,878), su SMAPE (189,9 %) y todas las métricas del total semanal (MAE 10,69) son peores que las del modelo base. Predice bien muchos platos de baja venta, pero falla en las semanas altas. El vigente se eligió en validación (LSTM 0,590 frente a XGBoost 0,611) y no se cambió después de ver la prueba.
 - **Qué significa el MAE.** Un MAE de 0,485 es que la proyección se aleja, en promedio, medio plato por plato y semana. Como el plato promedio vende 0,37 unidades por semana en prueba y el 78 % de las filas son cero, ese error es grande en términos relativos y por eso el SMAPE es alto. Para planificar compras sirve más la demanda total: se aleja unas 9,5 unidades por semana sobre un promedio real de 16,8 en prueba (más de la mitad). Es una guía de orden de magnitud, no una cifra para fijar pedidos exactos.
 - **Efecto de la caída de la demanda.** El promedio semanal cae de 25,7 unidades en validación a 16,8 en prueba, y el último año tiene semanas con 0 a 5 unidades. Los modelos se entrenaron con niveles más altos y tienden a sobreestimar al final (se ve en `results/fig_real_vs_pred_total.png`). Por eso las métricas de prueba no son comparables con las de validación.
 - **Proyección de la semana 2026-01-05:** parte de semanas con ventas muy bajas (4 y 5 unidades). El total proyectado es de 12 unidades y hay 1 alerta. Al redondear a enteros, casi todos los platos quedan en 0; el detalle del plato muestra además el valor sin redondear.
-- **Recarga de archivos en el navegador:** como el vigente es la LSTM, que no se evalúa en el navegador, al cargar un archivo nuevo se recalcula con XGBoost. Esto está avisado en la vista «Confiabilidad». XGBoost fue el peor modelo, así que esas proyecciones recalculadas son menos confiables que las originales.
+- **Recarga de archivos en el navegador:** como el vigente es la LSTM, que no se evalúa en el navegador, al cargar un archivo nuevo se recalcula con XGBoost (ventana 12), que en el total semanal es peor que el modelo base. Esto está avisado en la vista «Confiabilidad». XGBoost fue el peor modelo, así que esas proyecciones recalculadas son menos confiables que las originales.
 - **Limitaciones:**
   - datos de un solo restaurante del Reino Unido; la estacionalidad aprendida no es transferible a Colombia sin reentrenar;
   - el estado de los platos usa la fecha de corte fija 2024-12-30 de la tesis;

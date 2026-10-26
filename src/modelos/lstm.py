@@ -12,6 +12,7 @@ import numpy as np
 import torch
 from torch import nn
 
+from ..csvio import escribir_clave_valor, leer_clave_valor
 from ..evaluacion import mae
 
 SEMILLA = 42
@@ -42,7 +43,7 @@ class Escalador:
     def precio(self, x):
         return (np.asarray(x, float) - self.pmin) / (self.pmax - self.pmin)
 
-    def a_json(self):
+    def a_dict(self):
         return {"umax": self.umax, "pmin": self.pmin, "pmax": self.pmax}
 
 
@@ -116,9 +117,10 @@ def buscar_y_evaluar(var, platos, cats, salida: Path, reusar=False):
     esc = Escalador(var[(var.conjunto == "entrenamiento") & var.plato.isin(platos) & (var.idx_semana >= 4)])
     sem = {c: set(var.loc[var.conjunto == c, "semana"]) for c in ("entrenamiento", "validacion", "prueba")}
     res = []
-    if reusar and (salida / "config.json").exists():
+    if reusar and (salida / "config.csv").exists():
         # Repite solo el ajuste con la configuración ya elegida (misma semilla: mismos resultados), sin la grilla
-        mejor = json.loads((salida / "config.json").read_text())["config"]
+        c = leer_clave_valor(salida / "config.csv")
+        mejor = {k: c[k] for k in ("ventana", "unidades", "dropout", "epocas", "mae_val")}
         res = [mejor]
     grilla = [] if res else itertools.product(*GRILLA.values())
     for v, u, d in grilla:
@@ -148,18 +150,15 @@ def buscar_y_evaluar(var, platos, cats, salida: Path, reusar=False):
     pred_te = dict(zip(te[3], predecir(red, te[0], te[1], esc)))
     salida.mkdir(parents=True, exist_ok=True)
     torch.save(red.state_dict(), salida / "lstm.pt")
-    (salida / "config.json").write_text(json.dumps(
-        {"config": mejor, "escalador": esc.a_json(), "platos": platos, "categorias": cats}, indent=2))
+    escribir_clave_valor(salida / "config.csv", {**mejor, **esc.a_dict()})
     return {"config": mejor, "busqueda": res, "val": pred_val, "prueba": pred_te}
 
 
-def proyectar_siguiente(var, platos_proy, directorio: Path, semana_sig):
+def proyectar_siguiente(var, platos_proy, directorio: Path, platos, cats):
     """Predicción de la semana siguiente al último dato con el modelo guardado (para exportar.py)."""
-    cfg = json.loads((directorio / "config.json").read_text())
-    c, e = cfg["config"], cfg["escalador"]
+    c = leer_clave_valor(directorio / "config.csv")
     esc = Escalador.__new__(Escalador)
-    esc.umax, esc.pmin, esc.pmax = e["umax"], e["pmin"], e["pmax"]
-    platos, cats = cfg["platos"], cfg["categorias"]
+    esc.umax, esc.pmin, esc.pmax = c["umax"], c["pmin"], c["pmax"]
     red = Red(len(platos) + len(cats), c["unidades"], c["dropout"])
     red.load_state_dict(torch.load(directorio / "lstm.pt"))
     out = {}

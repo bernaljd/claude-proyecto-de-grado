@@ -1,0 +1,10 @@
+clave,valor
+modelo_vigente,LSTM
+rango_desde,2023-01-02
+rango_hasta,2025-12-29
+fecha_calculo,2026-10-26 20:25
+nota_recarga,"Al cargar un archivo nuevo, el navegador recalcula con XGBoost; las proyecciones originales usan el modelo vigente."
+frase_MAE,"En promedio, la proyección se aleja 0.48 unidades por plato y semana."
+frase_RMSE,Los errores grandes pesan más: el desvío típico es de 0.83 unidades por plato y semana.
+frase_SMAPE,"En porcentaje, el error relativo promedio por plato es de 118 %; es alto porque la mayoría de platos vende pocas unidades por semana."
+frase_total,"Para la demanda total de la semana, la proyección se aleja 9.5 unidades en promedio."

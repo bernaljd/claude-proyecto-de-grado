@@ -1,23 +1,14 @@
 // Carga de los JSON por defecto y del resultado guardado en el navegador (localStorage).
 import { createContext, type ReactNode, useCallback, useContext, useEffect, useState } from "react";
+import { fuenteRed } from "./lib/csv";
+import { leerDatos } from "./lib/datosCsv";
 import type { Datos } from "./types";
 
 const CLAVE = "dss_datos_cargados_v1";
 const base = import.meta.env.BASE_URL;
 
-async function leer<T>(n: string): Promise<T> {
-  const r = await fetch(`${base}data/${n}.json`);
-  if (!r.ok) throw new Error(`No se pudo leer ${n}.json`);
-  return r.json();
-}
-
-export async function cargarOriginales(): Promise<Datos> {
-  const [resumen, platos, serie, menu, ranking, confiabilidad] = await Promise.all([
-    leer<Datos["resumen"]>("resumen"), leer<Datos["platos"]>("platos"), leer<Datos["serie"]>("serie_semanal"),
-    leer<Datos["menu"]>("ingenieria_menu"), leer<Datos["ranking"]>("ranking"), leer<Datos["confiabilidad"]>("confiabilidad"),
-  ]);
-  return { resumen, platos, serie, menu, ranking, confiabilidad, origen: "original" };
-}
+/** Los datos por defecto son tablas CSV de web/public/data/ (leerDatos las convierte en objetos para las vistas). */
+export const cargarOriginales = (): Promise<Datos> => leerDatos(fuenteRed(base));
 
 interface Ctx {
   datos: Datos | null; error: string | null;

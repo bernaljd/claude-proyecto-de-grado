@@ -10,6 +10,7 @@ import matplotlib
 import numpy as np
 import pandas as pd
 
+from .csvio import escribir_clave_valor
 from .evaluacion import metricas
 from .modelos import lstm as lm
 from .modelos import xgboost_modelo as xm
@@ -98,7 +99,6 @@ def main():
     filas = [{"modelo": m, "conjunto": c, "nivel": n, "metrica": k, "valor": v}
              for m, d in metr.items() for c, dd in d.items() for n, mm in dd.items() for k, v in mm.items()]
     pd.DataFrame(filas).to_csv(RES / "metricas.csv", index=False)
-    (RES / "metricas.json").write_text(json.dumps(metr, indent=2, ensure_ascii=False))
 
     # Selección del modelo vigente (CA-07): menor MAE por plato en validación.
     vigente = min(metr, key=lambda m: metr[m]["validacion"]["por_plato"]["MAE"])
@@ -109,12 +109,15 @@ def main():
         n_tot = sum(metr[m]["prueba"]["total_semanal"][k] < base_ok["total_semanal"][k] for k in base_ok["total_semanal"])
         criterio[m] = {"por_plato_n_de_3": int(n_pl), "total_semanal_n_de_3": int(n_tot)}
     hip = {"XGBoost": dict(params, ventana=v_xgb), "LSTM": ls["config"]}.get(vigente, {})
-    (MOD / "modelo_vigente.json").write_text(json.dumps({
-        "nombre": vigente, "hiperparametros": hip, "n_arboles_xgb": n_arb, "metricas": metr[vigente],
-        "criterio_exito_vs_base": criterio}, indent=2, ensure_ascii=False))
+    vig = {"nombre": vigente, "n_arboles_xgb": n_arb, "ventana_xgb": v_xgb}
+    vig.update({f"hp_{k}": v for k, v in hip.items()})
+    for m, c in criterio.items():
+        vig[f"criterio_{m}_por_plato_n_de_3"] = c["por_plato_n_de_3"]
+        vig[f"criterio_{m}_total_semanal_n_de_3"] = c["total_semanal_n_de_3"]
+    escribir_clave_valor(MOD / "modelo_vigente.csv", vig)
     mejores = criterio["XGBoost"]["por_plato_n_de_3"]
-    m_fin.save_model(MOD / "xgb.json")
-    (MOD / "xgb_config.json").write_text(json.dumps({"params": params, "n_arboles": n_arb, "ventana": v_xgb}, indent=2))
+    m_fin.get_booster().save_model(str(MOD / "xgb.ubj"))  # formato binario de XGBoost (no JSON)
+    escribir_clave_valor(MOD / "xgb_config.csv", {"ventana": v_xgb, "n_arboles": n_arb, **{f"param_{k}": v for k, v in params.items()}})
 
     tablas(metr, params, n_arb, res, v_xgb)
     figuras(preds, sets, m_fin, cw)
