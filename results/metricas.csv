@@ -23,3 +23,15 @@ XGBoost,prueba,por_plato,SMAPE,176.24238550665652
 XGBoost,prueba,total_semanal,MAE,9.848414714519794
 XGBoost,prueba,total_semanal,RMSE,12.35778415942335
 XGBoost,prueba,total_semanal,SMAPE,59.42907471915058
+LSTM,validacion,por_plato,MAE,0.5896340899328646
+LSTM,validacion,por_plato,RMSE,1.0004111159059266
+LSTM,validacion,por_plato,SMAPE,120.68706622950953
+LSTM,validacion,total_semanal,MAE,11.302523319537823
+LSTM,validacion,total_semanal,RMSE,12.980125157457863
+LSTM,validacion,total_semanal,SMAPE,51.38217802953006
+LSTM,prueba,por_plato,MAE,0.4849669962373172
+LSTM,prueba,por_plato,RMSE,0.8347878404578425
+LSTM,prueba,por_plato,SMAPE,117.66748298064427
+LSTM,prueba,total_semanal,MAE,9.515425021831806
+LSTM,prueba,total_semanal,RMSE,11.898231672497477
+LSTM,prueba,total_semanal,SMAPE,61.246781944655126

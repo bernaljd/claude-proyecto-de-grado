@@ -10083,19 +10083,24 @@
   "Stewed Fried Fish": "modelable"
  },
  "proy": {
+  "Asun goat meat": 0,
+  "Bitterleaf soup": 0,
+  "Fried Yam": 0,
+  "Goat Meat Peppersoup": 1,
+  "Nkwobi": 0,
+  "Oha Soup": 0,
+  "PEPPERED TURKEY": 0,
   "African Coke": 0,
   "Amala (Dried Yam Flour)": 0,
-  "Assorted Meat": 0,
+  "Assorted Meat": 1,
   "Assorted Meat Pepper Soup": 0,
   "Assorted Meat Stew": 0,
-  "Asun goat meat": 0,
   "Ayamase Sauce": 0,
   "Beans": 0,
   "Beef Stew": 0,
   "Beef Suya": 0,
-  "Bitterleaf soup": 0,
   "Boiled Rice": 0,
-  "Boiled Rice with Designer Stew - Ayamase": 2,
+  "Boiled Rice with Designer Stew - Ayamase": 1,
   "Bottle Water": 0,
   "Buns": 0,
   "Chicken Stew": 0,
@@ -10104,37 +10109,762 @@
   "Coke 330ml": 0,
   "Coleslaw": 0,
   "Efo Riro": 0,
-  "Egusi (Melon Soup)": 0,
+  "Egusi (Melon Soup)": 1,
   "Ewedu & Gbegiri (NEW)": 0,
   "Extra Stew": 0,
   "Fried Fish": 0,
   "Fried Plantain - Dodo": 0,
   "Fried Rice": 0,
-  "Fried Yam": 0,
   "Gari (Dried Cassava Flour)": 0,
-  "Goat Meat Peppersoup": 1,
   "Jolof": 0,
-  "Jolof with Beef": 0,
+  "Jolof with Beef": 1,
   "Jolof with Chicken": 1,
   "Jolof with Curry Goat": 1,
-  "Jolof with Fish": 0,
+  "Jolof with Fish": 1,
   "Malta Guinness": 0,
-  "Maltina": 1,
-  "Meat Pie": 0,
-  "Moi Moi - Beans Pudding": 0,
-  "Nkwobi": 0,
+  "Maltina": 0,
+  "Meat Pie": 1,
+  "Moi Moi - Beans Pudding": 1,
   "Ogbono": 0,
-  "Oha Soup": 0,
-  "Okro": 0,
-  "PEPPERED TURKEY": 0,
+  "Okro": 1,
   "Palm Wine": 0,
   "Patty": 0,
   "Plain Fried Rice": 0,
-  "Plain Jolof": 0,
-  "Plantain Chips": 0,
-  "Pounded Yam": 0,
+  "Plain Jolof": 1,
+  "Plantain Chips": 1,
+  "Pounded Yam": 1,
   "Semolina (Maize Flour)": 0,
   "Stewed Fried Fish": 0
+ },
+ "filas_siguiente": {
+  "African Coke": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 3.0
+   },
+   "precio": 3.0
+  },
+  "Amala (Dried Yam Flour)": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 4.5
+   },
+   "precio": 4.5
+  },
+  "Assorted Meat": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 1.0,
+    "lag_4": 0.0,
+    "mm4": 0.25,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 3.0
+   },
+   "precio": 3.0
+  },
+  "Assorted Meat Pepper Soup": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 10.0
+   },
+   "precio": 10.0
+  },
+  "Assorted Meat Stew": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 10.0
+   },
+   "precio": 10.0
+  },
+  "Asun goat meat": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 11.5
+   },
+   "precio": 11.5
+  },
+  "Ayamase Sauce": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 8.5
+   },
+   "precio": 8.5
+  },
+  "Beans": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 8.5
+   },
+   "precio": 8.5
+  },
+  "Beef Stew": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 8.5
+   },
+   "precio": 8.5
+  },
+  "Beef Suya": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 10.0
+   },
+   "precio": 10.0
+  },
+  "Bitterleaf soup": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 10.5
+   },
+   "precio": 10.5
+  },
+  "Boiled Rice": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 2.5
+   },
+   "precio": 2.5
+  },
+  "Boiled Rice with Designer Stew - Ayamase": {
+   "fila": {
+    "lag_1": 2.0,
+    "lag_2": 0.0,
+    "lag_3": 3.0,
+    "lag_4": 2.0,
+    "mm4": 1.75,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 9.5
+   },
+   "precio": 9.5
+  },
+  "Bottle Water": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 1.0
+   },
+   "precio": 1.0
+  },
+  "Buns": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 5.0
+   },
+   "precio": 5.0
+  },
+  "Chicken Stew": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 7.5
+   },
+   "precio": 7.5
+  },
+  "Chicken Suya": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 6.0
+   },
+   "precio": 6.0
+  },
+  "Chin Chin": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 2.0
+   },
+   "precio": 2.0
+  },
+  "Coke 330ml": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 1.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.25,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 1.0
+   },
+   "precio": 1.0
+  },
+  "Coleslaw": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 1.0
+   },
+   "precio": 1.0
+  },
+  "Efo Riro": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 9.6275
+   },
+   "precio": 9.6275
+  },
+  "Egusi (Melon Soup)": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 1.0,
+    "mm4": 0.25,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 7.5
+   },
+   "precio": 7.5
+  },
+  "Ewedu & Gbegiri (NEW)": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 10.0
+   },
+   "precio": 10.0
+  },
+  "Extra Stew": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 2.0
+   },
+   "precio": 2.0
+  },
+  "Fried Fish": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 3.5
+   },
+   "precio": 3.5
+  },
+  "Fried Plantain - Dodo": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 1.0,
+    "mm4": 0.25,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 2.5
+   },
+   "precio": 2.5
+  },
+  "Fried Rice": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 8.5
+   },
+   "precio": 8.5
+  },
+  "Fried Yam": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 5.0
+   },
+   "precio": 5.0
+  },
+  "Gari (Dried Cassava Flour)": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 3.5
+   },
+   "precio": 3.5
+  },
+  "Goat Meat Peppersoup": {
+   "fila": {
+    "lag_1": 1.0,
+    "lag_2": 1.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.5,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 10.5
+   },
+   "precio": 10.5
+  },
+  "Jolof": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 10.0
+   },
+   "precio": 10.0
+  },
+  "Jolof with Beef": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 1.0,
+    "mm4": 0.25,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 8.5
+   },
+   "precio": 8.5
+  },
+  "Jolof with Chicken": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 1.0,
+    "lag_3": 0.0,
+    "lag_4": 1.0,
+    "mm4": 0.5,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 8.5
+   },
+   "precio": 8.5
+  },
+  "Jolof with Curry Goat": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 1.0,
+    "lag_4": 2.0,
+    "mm4": 0.75,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 9.0
+   },
+   "precio": 9.0
+  },
+  "Jolof with Fish": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 9.5
+   },
+   "precio": 9.5
+  },
+  "Malta Guinness": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 1.0,
+    "mm4": 0.25,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 2.5
+   },
+   "precio": 2.5
+  },
+  "Maltina": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 1.0,
+    "lag_3": 1.0,
+    "lag_4": 1.0,
+    "mm4": 0.75,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 2.5
+   },
+   "precio": 2.5
+  },
+  "Meat Pie": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 1.0,
+    "lag_4": 0.0,
+    "mm4": 0.25,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 2.5
+   },
+   "precio": 2.5
+  },
+  "Moi Moi - Beans Pudding": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 1.0,
+    "lag_4": 0.0,
+    "mm4": 0.25,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 3.0
+   },
+   "precio": 3.0
+  },
+  "Nkwobi": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 10.0
+   },
+   "precio": 10.0
+  },
+  "Ogbono": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 7.5
+   },
+   "precio": 7.5
+  },
+  "Oha Soup": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 12.0
+   },
+   "precio": 12.0
+  },
+  "Okro": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 1.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.25,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 7.5
+   },
+   "precio": 7.5
+  },
+  "PEPPERED TURKEY": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 7.5
+   },
+   "precio": 7.5
+  },
+  "Palm Wine": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 5.0
+   },
+   "precio": 5.0
+  },
+  "Patty": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 2.5
+   },
+   "precio": 2.5
+  },
+  "Plain Fried Rice": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 5.5
+   },
+   "precio": 5.5
+  },
+  "Plain Jolof": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 1.0,
+    "mm4": 0.25,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 5.5
+   },
+   "precio": 5.5
+  },
+  "Plantain Chips": {
+   "fila": {
+    "lag_1": 1.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.25,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 1.5
+   },
+   "precio": 1.5
+  },
+  "Pounded Yam": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 3.5
+   },
+   "precio": 3.5
+  },
+  "Semolina (Maize Flour)": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 3.5
+   },
+   "precio": 3.5
+  },
+  "Stewed Fried Fish": {
+   "fila": {
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_3": 0.0,
+    "lag_4": 0.0,
+    "mm4": 0.0,
+    "sem_sin": 0.23931566428755774,
+    "sem_cos": 0.970941817426052,
+    "mes": 1,
+    "precio_prev": 9.0
+   },
+   "precio": 9.0
+  }
  },
  "clasif_hist": {
   "African Coke": "Perro",
@@ -10177,11 +10907,20 @@
   "Semolina (Maize Flour)": "Perro"
  },
  "clasif_proy": {
-  "Boiled Rice with Designer Stew - Ayamase": "Estrella",
   "Goat Meat Peppersoup": "Estrella",
+  "Assorted Meat": "Caballo de arado",
+  "Boiled Rice with Designer Stew - Ayamase": "Estrella",
+  "Egusi (Melon Soup)": "Estrella",
+  "Jolof with Beef": "Estrella",
   "Jolof with Chicken": "Estrella",
   "Jolof with Curry Goat": "Estrella",
-  "Maltina": "Caballo de arado"
+  "Jolof with Fish": "Estrella",
+  "Meat Pie": "Caballo de arado",
+  "Moi Moi - Beans Pudding": "Caballo de arado",
+  "Okro": "Estrella",
+  "Plain Jolof": "Caballo de arado",
+  "Plantain Chips": "Caballo de arado",
+  "Pounded Yam": "Caballo de arado"
  },
  "reparto": {
   "African Coke": [
@@ -10204,7 +10943,7 @@
    0,
    0,
    0,
-   0,
+   1,
    0,
    0
   ],
@@ -10284,7 +11023,7 @@
    0,
    0,
    1,
-   1,
+   0,
    0,
    0
   ],
@@ -10357,7 +11096,7 @@
    0,
    0,
    0,
-   0,
+   1,
    0
   ],
   "Ewedu & Gbegiri (NEW)": [
@@ -10435,7 +11174,7 @@
   "Jolof with Beef": [
    0,
    0,
-   0,
+   1,
    0,
    0,
    0
@@ -10459,7 +11198,7 @@
   "Jolof with Fish": [
    0,
    0,
-   0,
+   1,
    0,
    0,
    0
@@ -10475,7 +11214,7 @@
   "Maltina": [
    0,
    0,
-   1,
+   0,
    0,
    0,
    0
@@ -10485,7 +11224,7 @@
    0,
    0,
    0,
-   0,
+   1,
    0
   ],
   "Moi Moi - Beans Pudding": [
@@ -10493,7 +11232,7 @@
    0,
    0,
    0,
-   0,
+   1,
    0
   ],
   "Nkwobi": [
@@ -10524,7 +11263,7 @@
    0,
    0,
    0,
-   0,
+   1,
    0,
    0
   ],
@@ -10564,14 +11303,14 @@
    0,
    0,
    0,
-   0,
+   1,
    0,
    0
   ],
   "Plantain Chips": [
    0,
    0,
-   0,
+   1,
    0,
    0,
    0
@@ -10580,7 +11319,7 @@
    0,
    0,
    0,
-   0,
+   1,
    0,
    0
   ],

@@ -55,7 +55,7 @@ describe("Preparación del CSV", () => {
       resumen: datos("resumen"), platos: datos("platos"), serie: datos("serie_semanal"), menu: datos("ingenieria_menu"),
       ranking: datos("ranking"), confiabilidad: datos("confiabilidad"), origen: "original",
     };
-    const r = calcularTodo(lect.ventas, { meta }, base);
+    const r = calcularTodo(lect.ventas, { meta, xgb: cargarModelo(datos("modelo_xgb")) }, base);
     for (const p of r.platos.platos) {
       if (p.proyeccion !== null) expect(p.proyeccion).toBe(fx.proy[p.plato]);
       if (p.reparto_diario) expect(p.reparto_diario).toEqual(fx.reparto[p.plato]);

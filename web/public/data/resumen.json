@@ -7,13 +7,13 @@
  "semana_proyectada": "2026-01-05",
  "unidades_ultima_semana": 4,
  "unidades_semana_anterior": 5,
- "total_proyectado": 6,
- "n_alertas": 0,
+ "total_proyectado": 12,
+ "n_alertas": 1,
  "platos_por_categoria": {
   "Perro": 12,
   "Estrella": 11,
   "Caballo de arado": 8,
   "Puzzle": 7
  },
- "fecha_calculo": "2026-10-26 00:43"
+ "fecha_calculo": "2026-10-26 02:31"
 }

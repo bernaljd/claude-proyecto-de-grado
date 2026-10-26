@@ -34,3 +34,9 @@ RNF-03/RNF-04 (con `npm run preview` activo): `NODE_PATH=$(npm root -g) node scr
 2. En Vercel: *Add New → Project* e importe el repositorio.
 3. **Root Directory: `web`**. Framework preset: Vite. Build `npm run build`, salida `dist`.
 4. *Deploy*. No requiere variables de entorno ni funciones; `web/vercel.json` redirige las rutas al SPA.
+
+## Modelos
+Modelo base (media móvil de 4 semanas), XGBoost y LSTM (PyTorch). El vigente es el de menor MAE en validación
+(`models/modelo_vigente.json`). El navegador solo evalúa XGBoost; si el vigente es la LSTM, las proyecciones
+originales usan la LSTM y la recarga de un archivo usa XGBoost (se avisa en «Confiabilidad»).
+Resultados completos en `RESULTADOS.md`; estado y pendientes en `ESTADO_DEL_PROYECTO.md`.

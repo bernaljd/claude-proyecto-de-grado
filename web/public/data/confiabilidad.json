@@ -1,27 +1,34 @@
 {
- "modelo_vigente": "Modelo base (mm4)",
- "hiperparametros": {},
+ "modelo_vigente": "LSTM",
+ "hiperparametros": {
+  "ventana": 12,
+  "unidades": 64,
+  "dropout": 0.0,
+  "epocas": 16,
+  "mae_val": 0.5896340978801505
+ },
  "metricas_prueba": {
   "por_plato": {
-   "MAE": 0.4995726495726496,
-   "RMSE": 0.8705165967970658,
-   "SMAPE": 102.57467205646495
+   "MAE": 0.4849669962373172,
+   "RMSE": 0.8347878404578425,
+   "SMAPE": 117.66748298064427
   },
   "total_semanal": {
-   "MAE": 9.51923076923077,
-   "RMSE": 11.725834397077776,
-   "SMAPE": 62.50123976839881
+   "MAE": 9.515425021831806,
+   "RMSE": 11.898231672497477,
+   "SMAPE": 61.246781944655126
   }
  },
  "rango_datos": {
   "desde": "2023-01-02",
   "hasta": "2025-12-29"
  },
- "fecha_calculo": "2026-10-26 00:43",
+ "fecha_calculo": "2026-10-26 02:31",
+ "nota_recarga": "Al cargar un archivo nuevo, el navegador recalcula con XGBoost; las proyecciones originales usan el modelo vigente.",
  "frases": {
-  "MAE": "En promedio, la proyección se aleja 0.50 unidades por plato y semana.",
-  "RMSE": "Los errores grandes pesan más: el desvío típico es de 0.87 unidades por plato y semana.",
-  "SMAPE": "En porcentaje, el error relativo promedio por plato es de 103 %; es alto porque la mayoría de platos vende pocas unidades por semana.",
+  "MAE": "En promedio, la proyección se aleja 0.48 unidades por plato y semana.",
+  "RMSE": "Los errores grandes pesan más: el desvío típico es de 0.83 unidades por plato y semana.",
+  "SMAPE": "En porcentaje, el error relativo promedio por plato es de 118 %; es alto porque la mayoría de platos vende pocas unidades por semana.",
   "total": "Para la demanda total de la semana, la proyección se aleja 9.5 unidades en promedio."
  }
 }

@@ -1,5 +1,6 @@
 {
- "vigente": "base",
+ "vigente": "xgboost",
+ "modelo_vigente": "LSTM",
  "columnas": [
   "lag_1",
   "lag_2",

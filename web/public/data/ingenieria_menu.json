@@ -432,22 +432,11 @@
  },
  "proyectada": {
   "umbrales": {
-   "margen_ponderado": 5.363888888888888,
-   "umbral_popularidad": 0.13999999999999999,
-   "n_platos": 5
+   "margen_ponderado": 4.464936965811965,
+   "umbral_popularidad": 0.06999999999999999,
+   "n_platos": 10
   },
   "platos": [
-   {
-    "plato": "Boiled Rice with Designer Stew - Ayamase",
-    "categoria": "MAIN COURSES",
-    "unidades": 2.0,
-    "precio": 9.5,
-    "costo": 3.3233333333333337,
-    "margen": 6.176666666666666,
-    "popularidad": 0.3333333333333333,
-    "categoria_menu": "Estrella",
-    "accion": "Mantener precio, porción y visibilidad en la carta."
-   },
    {
     "plato": "Goat Meat Peppersoup",
     "categoria": "APETISERS",
@@ -455,9 +444,64 @@
     "precio": 10.5,
     "costo": 3.67,
     "margen": 6.83,
+    "popularidad": 0.08333333333333333,
+    "categoria_menu": "Estrella",
+    "accion": "Mantener precio, porción y visibilidad en la carta."
+   },
+   {
+    "plato": "Ayamase Sauce",
+    "categoria": "EXTRAS",
+    "unidades": 1.0,
+    "precio": 8.5,
+    "costo": 2.97,
+    "margen": 5.529999999999999,
+    "popularidad": 0.08333333333333333,
+    "categoria_menu": "Estrella",
+    "accion": "Mantener precio, porción y visibilidad en la carta."
+   },
+   {
+    "plato": "Boiled Rice with Designer Stew - Ayamase",
+    "categoria": "MAIN COURSES",
+    "unidades": 1.0,
+    "precio": 9.5,
+    "costo": 3.3233333333333337,
+    "margen": 6.176666666666666,
+    "popularidad": 0.08333333333333333,
+    "categoria_menu": "Estrella",
+    "accion": "Mantener precio, porción y visibilidad en la carta."
+   },
+   {
+    "plato": "Efo Riro",
+    "categoria": "SOUPS",
+    "unidades": 2.0,
+    "precio": 9.423846153846153,
+    "costo": 3.2961538461538464,
+    "margen": 6.127692307692307,
     "popularidad": 0.16666666666666666,
     "categoria_menu": "Estrella",
     "accion": "Mantener precio, porción y visibilidad en la carta."
+   },
+   {
+    "plato": "Egusi (Melon Soup)",
+    "categoria": "SOUPS",
+    "unidades": 1.0,
+    "precio": 9.038461538461538,
+    "costo": 3.160769230769231,
+    "margen": 5.877692307692307,
+    "popularidad": 0.08333333333333333,
+    "categoria_menu": "Estrella",
+    "accion": "Mantener precio, porción y visibilidad en la carta."
+   },
+   {
+    "plato": "Fried Plantain - Dodo",
+    "categoria": "EXTRAS",
+    "unidades": 1.0,
+    "precio": 2.5,
+    "costo": 0.8775000000000001,
+    "margen": 1.6225,
+    "popularidad": 0.08333333333333333,
+    "categoria_menu": "Caballo de arado",
+    "accion": "Revisar el precio o la porción, o combinarlo con platos de mayor margen."
    },
    {
     "plato": "Jolof with Chicken",
@@ -466,35 +510,53 @@
     "precio": 8.5,
     "costo": 2.97,
     "margen": 5.529999999999999,
-    "popularidad": 0.16666666666666666,
+    "popularidad": 0.08333333333333333,
     "categoria_menu": "Estrella",
     "accion": "Mantener precio, porción y visibilidad en la carta."
    },
    {
-    "plato": "Jolof with Curry Goat",
-    "categoria": "MAIN COURSES",
-    "unidades": 1.0,
-    "precio": 9.0,
-    "costo": 3.15,
-    "margen": 5.85,
+    "plato": "Moi Moi - Beans Pudding",
+    "categoria": "EXTRAS",
+    "unidades": 2.0,
+    "precio": 3.0,
+    "costo": 1.05,
+    "margen": 1.95,
     "popularidad": 0.16666666666666666,
-    "categoria_menu": "Estrella",
-    "accion": "Mantener precio, porción y visibilidad en la carta."
+    "categoria_menu": "Caballo de arado",
+    "accion": "Revisar el precio o la porción, o combinarlo con platos de mayor margen."
    },
    {
-    "plato": "Maltina",
-    "categoria": "DRINKS",
+    "plato": "Plain Jolof",
+    "categoria": "EXTRAS",
     "unidades": 1.0,
-    "precio": 2.5,
-    "costo": 0.8800000000000001,
-    "margen": 1.6199999999999999,
-    "popularidad": 0.16666666666666666,
+    "precio": 5.5,
+    "costo": 1.92,
+    "margen": 3.58,
+    "popularidad": 0.08333333333333333,
+    "categoria_menu": "Caballo de arado",
+    "accion": "Revisar el precio o la porción, o combinarlo con platos de mayor margen."
+   },
+   {
+    "plato": "Pounded Yam",
+    "categoria": "EXTRAS",
+    "unidades": 1.0,
+    "precio": 3.5,
+    "costo": 1.223,
+    "margen": 2.277,
+    "popularidad": 0.08333333333333333,
     "categoria_menu": "Caballo de arado",
     "accion": "Revisar el precio o la porción, o combinarlo con platos de mayor margen."
    }
   ]
  },
- "alertas": [],
+ "alertas": [
+  {
+   "plato": "Ayamase Sauce",
+   "historica": "Puzzle",
+   "proyectada": "Estrella",
+   "accion": "Mantener precio, porción y visibilidad en la carta."
+  }
+ ],
  "acciones": {
   "Estrella": "Mantener precio, porción y visibilidad en la carta.",
   "Caballo de arado": "Revisar el precio o la porción, o combinarlo con platos de mayor margen.",

@@ -284,7 +284,7 @@
     }
    ],
    "proyeccion": 0,
-   "proyeccion_exacta": 0.25,
+   "proyeccion_exacta": 0.17139677703380585,
    "participacion_dia": [
     19,
     14,
@@ -360,7 +360,7 @@
     }
    ],
    "proyeccion": 0,
-   "proyeccion_exacta": 0.0,
+   "proyeccion_exacta": 0.4718828797340393,
    "participacion_dia": [
     8,
     12,
@@ -587,8 +587,8 @@
      "unidades": 0
     }
    ],
-   "proyeccion": 0,
-   "proyeccion_exacta": 0.0,
+   "proyeccion": 1,
+   "proyeccion_exacta": 0.5377439260482788,
    "participacion_dia": [
     19,
     14,
@@ -601,7 +601,7 @@
     0,
     0,
     0,
-    0,
+    1,
     0,
     0
    ],
@@ -1112,8 +1112,8 @@
      "unidades": 2
     }
    ],
-   "proyeccion": 2,
-   "proyeccion_exacta": 1.75,
+   "proyeccion": 1,
+   "proyeccion_exacta": 0.9593690633773804,
    "participacion_dia": [
     1,
     2,
@@ -1126,7 +1126,7 @@
     0,
     0,
     1,
-    1,
+    0,
     0,
     0
    ],
@@ -1265,7 +1265,7 @@
     }
    ],
    "proyeccion": 0,
-   "proyeccion_exacta": 0.0,
+   "proyeccion_exacta": 0.017046399414539337,
    "participacion_dia": [
     8,
     12,
@@ -1417,7 +1417,7 @@
     }
    ],
    "proyeccion": 0,
-   "proyeccion_exacta": 0.0,
+   "proyeccion_exacta": 0.019010234624147415,
    "participacion_dia": [
     8,
     12,
@@ -1493,7 +1493,7 @@
     }
    ],
    "proyeccion": 0,
-   "proyeccion_exacta": 0.0,
+   "proyeccion_exacta": 0.17142002284526825,
    "participacion_dia": [
     8,
     12,
@@ -1569,7 +1569,7 @@
     }
    ],
    "proyeccion": 0,
-   "proyeccion_exacta": 0.25,
+   "proyeccion_exacta": 0.0,
    "participacion_dia": [
     3,
     2,
@@ -1720,8 +1720,8 @@
      "unidades": 0
     }
    ],
-   "proyeccion": 0,
-   "proyeccion_exacta": 0.0,
+   "proyeccion": 2,
+   "proyeccion_exacta": 1.5301263332366943,
    "participacion_dia": [
     4,
     3,
@@ -1734,8 +1734,8 @@
     0,
     0,
     0,
-    0,
-    0,
+    1,
+    1,
     0
    ],
    "precio": 9.423846153846153,
@@ -1796,8 +1796,8 @@
      "unidades": 0
     }
    ],
-   "proyeccion": 0,
-   "proyeccion_exacta": 0.25,
+   "proyeccion": 1,
+   "proyeccion_exacta": 1.269950270652771,
    "participacion_dia": [
     1,
     5,
@@ -1811,7 +1811,7 @@
     0,
     0,
     0,
-    0,
+    1,
     0
    ],
    "precio": 9.038461538461538,
@@ -1873,7 +1873,7 @@
     }
    ],
    "proyeccion": 0,
-   "proyeccion_exacta": 0.0,
+   "proyeccion_exacta": 0.035464778542518616,
    "participacion_dia": [
     8,
     14,
@@ -2025,7 +2025,7 @@
     }
    ],
    "proyeccion": 0,
-   "proyeccion_exacta": 0.0,
+   "proyeccion_exacta": 0.44437411427497864,
    "participacion_dia": [
     19,
     14,
@@ -2100,8 +2100,8 @@
      "unidades": 0
     }
    ],
-   "proyeccion": 0,
-   "proyeccion_exacta": 0.25,
+   "proyeccion": 1,
+   "proyeccion_exacta": 0.9870415925979614,
    "participacion_dia": [
     6,
     0,
@@ -2113,7 +2113,7 @@
    "reparto_diario": [
     0,
     0,
-    0,
+    1,
     0,
     0,
     0
@@ -2177,7 +2177,7 @@
     }
    ],
    "proyeccion": 0,
-   "proyeccion_exacta": 0.0,
+   "proyeccion_exacta": 0.32853472232818604,
    "participacion_dia": [
     12,
     6,
@@ -2764,7 +2764,7 @@
     }
    ],
    "proyeccion": 0,
-   "proyeccion_exacta": 0.25,
+   "proyeccion_exacta": 0.49492961168289185,
    "participacion_dia": [
     12,
     6,
@@ -2840,7 +2840,7 @@
     }
    ],
    "proyeccion": 1,
-   "proyeccion_exacta": 0.5,
+   "proyeccion_exacta": 0.7938267588615417,
    "participacion_dia": [
     12,
     6,
@@ -2915,8 +2915,8 @@
      "unidades": 0
     }
    ],
-   "proyeccion": 1,
-   "proyeccion_exacta": 0.75,
+   "proyeccion": 0,
+   "proyeccion_exacta": 0.23913700878620148,
    "participacion_dia": [
     12,
     6,
@@ -2928,7 +2928,7 @@
    "reparto_diario": [
     0,
     0,
-    1,
+    0,
     0,
     0,
     0
@@ -2992,7 +2992,7 @@
     }
    ],
    "proyeccion": 0,
-   "proyeccion_exacta": 0.0,
+   "proyeccion_exacta": 0.06660129874944687,
    "participacion_dia": [
     12,
     6,
@@ -3068,7 +3068,7 @@
     }
    ],
    "proyeccion": 0,
-   "proyeccion_exacta": 0.25,
+   "proyeccion_exacta": 0.0,
    "participacion_dia": [
     3,
     2,
@@ -3143,8 +3143,8 @@
      "unidades": 0
     }
    ],
-   "proyeccion": 1,
-   "proyeccion_exacta": 0.75,
+   "proyeccion": 0,
+   "proyeccion_exacta": 0.0,
    "participacion_dia": [
     3,
     2,
@@ -3156,7 +3156,7 @@
    "reparto_diario": [
     0,
     0,
-    1,
+    0,
     0,
     0,
     0
@@ -3220,7 +3220,7 @@
     }
    ],
    "proyeccion": 0,
-   "proyeccion_exacta": 0.25,
+   "proyeccion_exacta": 0.3752066195011139,
    "participacion_dia": [
     2,
     0,
@@ -3295,8 +3295,8 @@
      "unidades": 0
     }
    ],
-   "proyeccion": 0,
-   "proyeccion_exacta": 0.25,
+   "proyeccion": 2,
+   "proyeccion_exacta": 1.7393399477005005,
    "participacion_dia": [
     4,
     1,
@@ -3309,8 +3309,8 @@
     0,
     0,
     0,
-    0,
-    0,
+    1,
+    1,
     0
    ],
    "precio": 3.0,
@@ -3448,7 +3448,7 @@
     }
    ],
    "proyeccion": 0,
-   "proyeccion_exacta": 0.0,
+   "proyeccion_exacta": 0.14551590383052826,
    "participacion_dia": [
     8,
     14,
@@ -3600,7 +3600,7 @@
     }
    ],
    "proyeccion": 0,
-   "proyeccion_exacta": 0.25,
+   "proyeccion_exacta": 0.0731206089258194,
    "participacion_dia": [
     8,
     14,
@@ -4180,7 +4180,7 @@
     }
    ],
    "proyeccion": 0,
-   "proyeccion_exacta": 0.0,
+   "proyeccion_exacta": 0.13271361589431763,
    "participacion_dia": [
     19,
     14,
@@ -4255,8 +4255,8 @@
      "unidades": 0
     }
    ],
-   "proyeccion": 0,
-   "proyeccion_exacta": 0.25,
+   "proyeccion": 1,
+   "proyeccion_exacta": 1.4645483493804932,
    "participacion_dia": [
     19,
     14,
@@ -4269,7 +4269,7 @@
     0,
     0,
     0,
-    0,
+    1,
     0,
     0
    ],
@@ -4332,7 +4332,7 @@
     }
    ],
    "proyeccion": 0,
-   "proyeccion_exacta": 0.25,
+   "proyeccion_exacta": 0.0,
    "participacion_dia": [
     8,
     12,
@@ -4407,8 +4407,8 @@
      "unidades": 0
     }
    ],
-   "proyeccion": 0,
-   "proyeccion_exacta": 0.0,
+   "proyeccion": 1,
+   "proyeccion_exacta": 0.8684322834014893,
    "participacion_dia": [
     4,
     3,
@@ -4421,7 +4421,7 @@
     0,
     0,
     0,
-    0,
+    1,
     0,
     0
    ],

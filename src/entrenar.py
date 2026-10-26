@@ -160,7 +160,7 @@ def figuras(preds, sets, modelo, cols):
 
 
 def versiones():
-    libs = ["pandas", "numpy", "xgboost", "scikit-learn", "matplotlib", "pyarrow", "pytest"]
+    libs = ["pandas", "numpy", "xgboost", "scikit-learn", "matplotlib", "pyarrow", "torch", "pytest"]
     t = [f"Python {platform.python_version()} ({sys.platform})"] + [f"{l}=={version(l)}" for l in libs]
     (RES / "versions.txt").write_text("\n".join(t) + "\n")
     (Path("requirements.txt")).write_text("\n".join(t[1:]) + "\n")

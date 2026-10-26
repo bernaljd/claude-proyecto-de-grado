@@ -1,6 +1,6 @@
 # Estado del proyecto: DSS para restaurante PyME
 
-Resumen para el equipo de tesis. Rama: `claude/new-session-a151ka`. Todas las cifras salen de ejecutar el código sobre `data/raw/Anonymized_Restaurant_Sales_Data.csv`.
+Resumen para el equipo de tesis. Rama: `claude/new-session-a151ka`. **Estado: fases A a F completas; falta solo el despliegue real en Vercel y la prueba con usuarios.** Todas las cifras salen de ejecutar el código sobre `data/raw/Anonymized_Restaurant_Sales_Data.csv`.
 
 ## 1. Qué es y cómo está armado
 
@@ -89,29 +89,22 @@ npm run build && npm test
 
 ## 5. Lo que falta
 
-### Obligatorio para el anteproyecto
-- [ ] **Desplegar en Vercel.** El build y la configuración están listos, pero nadie ha hecho el despliegue real. Hay que importar el repo, poner Root Directory `web` y confirmar que el sitio publicado funciona.
-- [ ] **Fase E: modelo LSTM.** El anteproyecto promete XGBoost y LSTM comparados con el modelo base. Falta todo: ventana de 8 semanas, 32 unidades, dropout, parada temprana, escalado solo con entrenamiento y ajuste en validación. Hay que agregar sus filas a las tablas comparativas y recalcular el modelo vigente.
-- [ ] **Decidir qué hacer con que XGBoost no supera al base.** Opciones:
-  - reportarlo tal cual y analizarlo (lo más honesto);
-  - probar mejoras decididas **solo con validación**, nunca con prueba, por ejemplo evaluar con predicciones redondeadas o quitar los one-hot de plato;
-  - ver si la LSTM mejora el resultado.
-- [ ] **Fase F, cierre de `RESULTADOS.md`:**
-  - cumplimiento por objetivo (OE2, OE3, OE4 y general);
-  - configuración final de la LSTM;
-  - Cuadro 7.1 completo;
-  - análisis honesto (qué significa el MAE en unidades por plato y semana para planificar compras, y el efecto de la caída de demanda en el periodo de prueba).
+Las fases A a F del prompt están completas. El detalle final está en `RESULTADOS.md`.
 
-### Pendiente menor
-- [ ] Probar RNF-05 de verdad: cambiar el vigente a XGBoost, reexportar y comprobar que el dashboard no necesita cambios.
-- [ ] Prueba de Python que compare la preparación del navegador con la de Python variable por variable (hoy se compara la serie, los estados, la proyección y el reparto, no cada columna de rezagos).
-- [ ] Revisar contraste de color (4,5:1) y áreas táctiles de 44 px con una herramienta de accesibilidad; se aplicó en el diseño pero no se midió.
-- [ ] En celular, la vista de Demanda muestra la lista larga antes que el gráfico del plato. Conviene subir el gráfico o colapsar la lista.
-- [ ] Pasar `results/tabla_resultados.tex` y `results/tabla_config_xgb.tex` a los Cuadros 7.1 y 6.2 de la tesis (cuando esté la LSTM).
-- [ ] Verificar contra el documento de tesis la discrepancia del promedio semanal de 2024 y 2025.
-
-### Fuera de nuestro alcance
+- [ ] **Desplegar en Vercel.** El build estático y `vercel.json` están listos y verificados en local (`npm run build` y `npm run preview`), pero el despliegue real no se pudo ejecutar desde este entorno. Hay que importar el repositorio en Vercel con **Root Directory `web`**.
 - [ ] **RNF-01:** prueba de uso con usuarios reales. Requiere participantes y queda como «No verificado».
+- [ ] Pasar `results/tabla_resultados.tex` y `results/tabla_config_xgb.tex` a los Cuadros 7.1 y 6.2 del documento de tesis.
+- [ ] Confirmar con el director el promedio semanal de 2024 y 2025 (el prompt dice 42,5 y 23,7; por semana de inicio sale 42,06 y 23,42).
+- [ ] Opcional: repetir la LSTM con varias semillas para ver si su ventaja sobre el modelo base se sostiene.
+
+## 5b. Cambios desde la primera versión de este resumen
+
+- **LSTM hecha** (PyTorch): ventana 12, 64 unidades, dropout 0. Es el **modelo vigente** y **cumple el criterio de éxito** (mejora MAE y RMSE por plato frente al base), aunque por muy poco: MAE 0,485 frente a 0,500.
+- XGBoost sigue sin cumplir el criterio.
+- RNF-05 probado de verdad: se cambió el vigente a «Modelo base», se reexportó y el dashboard no necesitó cambios.
+- Paridad de las variables de la semana siguiente (rezagos, media móvil, calendario, precio) entre Python y el navegador, probada.
+- Contraste de color corregido (Caballo de arado, texto oscuro: 5,02:1) y vista de Demanda en celular con el gráfico arriba.
+- Pruebas: `pytest` 11 y `vitest` 9, todas pasan; 21 de 21 verificaciones de Playwright.
 
 ## 6. Mapa de archivos
 

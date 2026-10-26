@@ -62,7 +62,7 @@ def main():
     dump("modelo_meta.json", meta)
 
     # --- Proyección semanal por plato ---
-    proy, filas, exactas, filas_fx = {}, {}, {}, {}
+    proy, filas, exactas, filas_fx, f_mod = {}, {}, {}, {}, {}
     for plato, g in serie.groupby("plato"):
         g = g.sort_values("semana")
         est = estados[plato]
@@ -70,6 +70,8 @@ def main():
             continue
         f = fila_siguiente(g, siguiente)
         filas_fx[plato] = {"fila": f, "precio": float(g["precio"].iloc[-1])}
+        if est == "modelable":
+            f_mod[plato] = f
         if est == "historial_insuficiente":
             primera = g.loc[g["unidades"] > 0, "semana"].min()
             disp = g[g["semana"] >= primera]["unidades"].to_numpy()[-4:]
@@ -84,15 +86,24 @@ def main():
         for p, v in lm.proyectar_siguiente(var, modelables, Path("models/lstm"), siguiente).items():
             exactas[p] = v
             proy[p] = redondear(v)
-    if filas:
-        M = pd.DataFrame(filas).T
+    def pred_xgb(fs):
+        M = pd.DataFrame(fs).T
         for p in modelables:
             M[f"plato_{p}"] = (M.index == p).astype(int)
         for c in cats:
             M[f"cat_{c}"] = [int(cat_plato[p] == c) for p in M.index]
-        pred = np.clip(modelo.predict(M[cols].astype(float)), 0, None)
-        exactas.update({p: float(v) for p, v in zip(M.index, pred)})
-        proy.update({p: redondear(float(v)) for p, v in zip(M.index, pred)})
+        return dict(zip(M.index, np.clip(modelo.predict(M[cols].astype(float)), 0, None)))
+
+    if filas:
+        for p, v in pred_xgb(filas).items():
+            exactas[p] = float(v)
+            proy[p] = redondear(float(v))
+    # Proyección que reproduce el navegador al recargar un archivo (siempre XGBoost si el vigente no es el base)
+    if vigente["nombre"] == "LSTM":
+        proy_nav = {p: v for p, v in proy.items() if p not in f_mod}
+        proy_nav.update({p: redondear(float(v)) for p, v in pred_xgb(f_mod).items()})
+    else:
+        proy_nav = dict(proy)
 
     # --- Ingeniería de menú: histórica (últimas 12 semanas) y proyectada ---
     desde, hasta = semanas[-SEMANAS_PERIODO], semanas[-1]
@@ -100,12 +111,16 @@ def main():
     h_raw["categoria"] = h_raw["plato"].map(cat_plato)
     hist, umb_h = clasificar(h_raw)
     ult = serie[serie["unidades"] > 0].sort_values("semana").groupby("plato").tail(1).set_index("plato")
-    p_raw = pd.DataFrame({"plato": list(proy), "unidades": list(proy.values())})
     mh = h_raw.set_index("plato")
-    p_raw["precio"] = [mh["precio"].get(p, ult.loc[p, "ingreso"] / ult.loc[p, "unidades"]) for p in p_raw.plato]
-    p_raw["costo"] = [mh["costo"].get(p, ult.loc[p, "costo"] / ult.loc[p, "unidades"]) for p in p_raw.plato]
-    p_raw["categoria"] = p_raw["plato"].map(cat_plato)
-    pro, umb_p = clasificar(p_raw)
+
+    def clas_proy(pd_):
+        p_raw = pd.DataFrame({"plato": list(pd_), "unidades": list(pd_.values())})
+        p_raw["precio"] = [mh["precio"].get(p, ult.loc[p, "ingreso"] / ult.loc[p, "unidades"]) for p in p_raw.plato]
+        p_raw["costo"] = [mh["costo"].get(p, ult.loc[p, "costo"] / ult.loc[p, "unidades"]) for p in p_raw.plato]
+        p_raw["categoria"] = p_raw["plato"].map(cat_plato)
+        return clasificar(p_raw)
+    pro, umb_p = clas_proy(proy)
+    pro_nav, _ = clas_proy(proy_nav)
     # La proyectada usa los márgenes del último periodo histórico (umbral de margen del menú proyectado).
     alts = alertas(hist, pro)
 
@@ -197,10 +212,10 @@ def main():
     # Fixture de paridad de la serie (para verificar preparacion.ts)
     dump("serie_paridad.json", {"semanas": [str(s.date()) for s in semanas],
          "u": {p: g.sort_values("semana")["unidades"].tolist() for p, g in serie.groupby("plato")},
-         "estados": estados.to_dict(), "proy": proy, "filas_siguiente": filas_fx,
+         "estados": estados.to_dict(), "proy": proy_nav, "filas_siguiente": filas_fx,
          "clasif_hist": {r["plato"]: r["categoria_menu"] for r in filas_menu(hist)},
-         "clasif_proy": {r["plato"]: r["categoria_menu"] for r in filas_menu(pro)},
-         "reparto": {p["plato"]: p["reparto_diario"] for p in plist if p["reparto_diario"]}}, FIXT)
+         "clasif_proy": {r["plato"]: r["categoria_menu"] for r in filas_menu(pro_nav)},
+         "reparto": {p["plato"]: mayor_residuo(proy_nav[p["plato"]], p["participacion_dia"]) for p in plist if p["plato"] in proy_nav}}, FIXT)
     print("Exportado. Proyección total:", sum(proy.values()), "| alertas:", len(alts), "| vigente:", meta["vigente"])
 
 
