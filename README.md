@@ -40,3 +40,8 @@ Modelo base (media móvil de 4 semanas), XGBoost y LSTM (PyTorch). El vigente es
 (`models/modelo_vigente.json`). El navegador solo evalúa XGBoost; si el vigente es la LSTM, las proyecciones
 originales usan la LSTM y la recarga de un archivo usa XGBoost (se avisa en «Confiabilidad»).
 Resultados completos en `RESULTADOS.md`; estado y pendientes en `ESTADO_DEL_PROYECTO.md`.
+
+### Si Vercel dice que no encuentra el punto de entrada de Python
+Vercel está construyendo desde la raíz y ve `requirements.txt`. Solución: *Settings → General → Root Directory → `web`* y volver a desplegar.
+Como respaldo, la raíz trae un `vercel.json` y un `.vercelignore` que permiten desplegar también desde la raíz
+(construye `web/` y publica `web/dist`); no se pudo probar contra Vercel desde este entorno.

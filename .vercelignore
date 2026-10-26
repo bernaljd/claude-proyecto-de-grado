@@ -1,0 +1,8 @@
+# El sitio es solo web/. Se excluye el código Python para que Vercel no lo detecte como proyecto Python.
+requirements.txt
+src/
+tests/
+data/
+models/
+results/
+scripts/
