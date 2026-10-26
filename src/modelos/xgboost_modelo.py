@@ -10,6 +10,8 @@ MAX_ARBOLES = 1000
 PARADA = 50
 SEMILLA = 42
 
+VENTANAS = [4, 8, 12]  # mismas ventanas que explora la LSTM
+
 GRILLA = {
     "max_depth": [3, 4, 6],
     "learning_rate": [0.03, 0.1],
@@ -54,3 +56,14 @@ def ajustar(params, n_arboles, X, y):
     m = _modelo(params, n_arboles)
     m.fit(X, y, verbose=False)
     return m
+
+
+def matriz_ventana(var, platos, cats, ventana, semanas_objetivo=None):
+    """Dataset ventaneado + one-hot de plato y categoría (igual que la LSTM). Devuelve (DataFrame, columnas)."""
+    from ..ventaneo import columnas_ventana, ventanear_variables
+    w = ventanear_variables(var, platos, ventana, semanas_objetivo)
+    for p in platos:
+        w[f"plato_{p}"] = (w["plato"] == p).astype(int)
+    for c in cats:
+        w[f"cat_{c}"] = (w["categoria"] == c).astype(int)
+    return w, columnas_ventana(ventana) + [f"plato_{p}" for p in platos] + [f"cat_{c}" for c in cats]

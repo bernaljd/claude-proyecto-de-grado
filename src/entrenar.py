@@ -1,5 +1,6 @@
 """Entrenamiento y evaluación (CRISP-DM fases 4-5). Uso: python -m src.entrenar"""
 import json
+import os
 import platform
 import sys
 from importlib.metadata import version
@@ -54,21 +55,42 @@ def main():
     tv = X[X.conjunto != "prueba"]
     print(f"Entrenamiento: {len(tr)} filas (tras quitar 4 semanas sin rezagos x {len(modelables)} platos)")
 
-    params, n_arb, res = xm.buscar(tr[cols], tr["unidades"], va[cols], va["unidades"])
-    print("Mejor:", params, n_arb)
+    # XGBoost con ventaneo: se elige la ventana (4, 8 o 12) junto con los hiperparámetros, en validación,
+    # con las mismas entradas por paso que la LSTM (unidades, precio, seno y coseno de la semana).
+    res, mejor = [], None
+    for v in xm.VENTANAS:
+        Xw, cw = xm.matriz_ventana(var, modelables, cats, v)
+        trw, vaw = Xw[Xw.conjunto == "entrenamiento"], Xw[Xw.conjunto == "validacion"]
+        p_v, n_v, r_v = xm.buscar(trw[cw], trw["unidades"], vaw[cw], vaw["unidades"])
+        for r in r_v:
+            r["ventana"] = v
+        res += r_v
+        mae_v = min(r["mae_val"] for r in r_v)
+        print(f"XGBoost ventana {v}: MAE validación {mae_v:.4f}", flush=True)
+        if mejor is None or mae_v < mejor["mae"]:
+            mejor = {"mae": mae_v, "v": v, "params": p_v, "n": n_v, "Xw": Xw, "cols": cw}
+    params, n_arb, v_xgb = mejor["params"], mejor["n"], mejor["v"]
+    Xw, cw = mejor["Xw"], mejor["cols"]
+    trw, vaw, tew = (Xw[Xw.conjunto == c] for c in ("entrenamiento", "validacion", "prueba"))
+    tvw = Xw[Xw.conjunto != "prueba"]
+    print("Mejor XGBoost:", v_xgb, params, n_arb)
     pd.DataFrame(res).sort_values("mae_val").to_csv(RES / "busqueda_xgb.csv", index=False)
 
-    m_val = xm.ajustar(params, n_arb, tr[cols], tr["unidades"])       # solo entrenamiento
-    m_fin = xm.ajustar(params, n_arb, tv[cols], tv["unidades"])       # entrenamiento + validación
+    m_val = xm.ajustar(params, n_arb, trw[cw], trw["unidades"])       # solo entrenamiento
+    m_fin = xm.ajustar(params, n_arb, tvw[cw], tvw["unidades"])       # entrenamiento + validación
     clip = lambda a: np.clip(a, 0, None)
+    alinear = lambda df, d: np.array([d[(p, s)] for p, s in zip(df.plato, df.semana)])
+    llave = lambda w, pr: dict(zip(zip(w.plato, w.semana), pr))
     preds = {
         "Modelo base (mm4)": {"validacion": predecir_base(va), "prueba": predecir_base(te)},
-        "XGBoost": {"validacion": clip(m_val.predict(va[cols])), "prueba": clip(m_fin.predict(te[cols]))},
+        "XGBoost": {"validacion": alinear(va, llave(vaw, clip(m_val.predict(vaw[cw])))),
+                    "prueba": alinear(te, llave(tew, clip(m_fin.predict(tew[cw]))))},
     }
     # LSTM (fase E): ajuste en validación; mismas filas de evaluación que los otros modelos
-    ls = lm.buscar_y_evaluar(var, modelables, cats, MOD / "lstm")
-    pd.DataFrame(ls["busqueda"]).sort_values("mae_val").to_csv(RES / "busqueda_lstm.csv", index=False)
-    alinear = lambda df, d: np.array([d[(p, s)] for p, s in zip(df.plato, df.semana)])
+    reusar = os.environ.get("REUSAR_LSTM") == "1"  # evita repetir la grilla de 27 configuraciones (≈25 min)
+    ls = lm.buscar_y_evaluar(var, modelables, cats, MOD / "lstm", reusar)
+    if not reusar:
+        pd.DataFrame(ls["busqueda"]).sort_values("mae_val").to_csv(RES / "busqueda_lstm.csv", index=False)
     preds["LSTM"] = {"validacion": alinear(va, ls["val"]), "prueba": alinear(te, ls["prueba"])}
     sets = {"validacion": va, "prueba": te}
     metr = {m: {c: evaluar(sets[c], p[c]) for c in sets} for m, p in preds.items()}
@@ -86,22 +108,22 @@ def main():
         n_pl = sum(metr[m]["prueba"]["por_plato"][k] < base_ok["por_plato"][k] for k in base_ok["por_plato"])
         n_tot = sum(metr[m]["prueba"]["total_semanal"][k] < base_ok["total_semanal"][k] for k in base_ok["total_semanal"])
         criterio[m] = {"por_plato_n_de_3": int(n_pl), "total_semanal_n_de_3": int(n_tot)}
-    hip = {"XGBoost": params, "LSTM": ls["config"]}.get(vigente, {})
+    hip = {"XGBoost": dict(params, ventana=v_xgb), "LSTM": ls["config"]}.get(vigente, {})
     (MOD / "modelo_vigente.json").write_text(json.dumps({
         "nombre": vigente, "hiperparametros": hip, "n_arboles_xgb": n_arb, "metricas": metr[vigente],
         "criterio_exito_vs_base": criterio}, indent=2, ensure_ascii=False))
     mejores = criterio["XGBoost"]["por_plato_n_de_3"]
     m_fin.save_model(MOD / "xgb.json")
-    (MOD / "xgb_config.json").write_text(json.dumps({"params": params, "n_arboles": n_arb}, indent=2))
+    (MOD / "xgb_config.json").write_text(json.dumps({"params": params, "n_arboles": n_arb, "ventana": v_xgb}, indent=2))
 
-    tablas(metr, params, n_arb, res)
-    figuras(preds, sets, m_fin, cols)
+    tablas(metr, params, n_arb, res, v_xgb)
+    figuras(preds, sets, m_fin, cw)
     versiones()
     print(json.dumps(metr, indent=2))
     print("Vigente:", vigente, "| criterio de éxito vs base:", json.dumps(criterio))
 
 
-def tablas(metr, params, n_arb, res):
+def tablas(metr, params, n_arb, res, v_xgb=None):
     L = ["% Cuadro 7.1: métricas en el conjunto de prueba", ""]
     for m, d in metr.items():
         p, t = d["prueba"]["por_plato"], d["prueba"]["total_semanal"]
@@ -111,8 +133,8 @@ def tablas(metr, params, n_arb, res):
     explor = {"objective": "reg:squarederror, reg:tweedie", "tweedie_variance_power": "1,2; 1,5",
               "n_estimators": "hasta 1.000 (parada temprana 50)", "max_depth": "3, 4, 6",
               "learning_rate": "0,03; 0,1", "subsample": "0,8; 1,0", "colsample_bytree": "0,8; 1,0",
-              "min_child_weight": "1, 5", "random_state": "42"}
-    elegido = dict(params, n_estimators=n_arb, random_state=42)
+              "min_child_weight": "1, 5", "random_state": "42", "ventana": "4, 8, 12 semanas"}
+    elegido = dict(params, n_estimators=n_arb, random_state=42, ventana=v_xgb)
     L = ["% Cuadro 6.2: configuración de XGBoost", ""]
     for k, e in explor.items():
         val = elegido.get(k, "no aplica")

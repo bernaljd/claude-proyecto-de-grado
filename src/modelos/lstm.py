@@ -108,7 +108,7 @@ def predecir(red, S, E, esc):
         return np.clip(red(S, E).numpy() * esc.umax, 0, None)
 
 
-def buscar_y_evaluar(var, platos, cats, salida: Path):
+def buscar_y_evaluar(var, platos, cats, salida: Path, reusar=False):
     """Búsqueda en validación; reentrena con entrenamiento+validación y devuelve predicciones.
 
     Devuelve dict con config, predicciones alineadas por (plato, semana) y los pasos para exportar.
@@ -116,7 +116,12 @@ def buscar_y_evaluar(var, platos, cats, salida: Path):
     esc = Escalador(var[(var.conjunto == "entrenamiento") & var.plato.isin(platos) & (var.idx_semana >= 4)])
     sem = {c: set(var.loc[var.conjunto == c, "semana"]) for c in ("entrenamiento", "validacion", "prueba")}
     res = []
-    for v, u, d in itertools.product(*GRILLA.values()):
+    if reusar and (salida / "config.json").exists():
+        # Repite solo el ajuste con la configuración ya elegida (misma semilla: mismos resultados), sin la grilla
+        mejor = json.loads((salida / "config.json").read_text())["config"]
+        res = [mejor]
+    grilla = [] if res else itertools.product(*GRILLA.values())
+    for v, u, d in grilla:
         fijar_semilla()
         tr = ventanas(var, esc, platos, cats, v, sem["entrenamiento"])
         va = ventanas(var, esc, platos, cats, v, sem["validacion"])
