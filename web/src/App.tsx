@@ -9,8 +9,9 @@ import Inicio from "./pages/Inicio";
 import Menu from "./pages/Menu";
 
 const ENLACES = [
-  { a: "/", t: "Inicio", i: "🏠" }, { a: "/demanda", t: "Demanda", i: "📈" }, { a: "/menu", t: "Menú", i: "🍽️" },
-  { a: "/alertas", t: "Alertas", i: "🔔" }, { a: "/cargar", t: "Cargar datos", i: "⬆️" }, { a: "/confiabilidad", t: "Confiabilidad", i: "✅" },
+  { a: "/", t: "Inicio", c: "Inicio" }, { a: "/demanda", t: "Demanda", c: "Demanda" }, { a: "/menu", t: "Menú", c: "Menú" },
+  { a: "/alertas", t: "Alertas", c: "Alertas" }, { a: "/cargar", t: "Cargar datos", c: "Datos" },
+  { a: "/confiabilidad", t: "Confiabilidad", c: "Confianza" },
 ];
 
 export default function App() {
@@ -21,9 +22,9 @@ export default function App() {
       <nav className="nav" aria-label="Navegación principal">
         <div className="marca">Restaurante<br /><small>Apoyo a decisiones</small></div>
         {ENLACES.map((e) => (
-          <NavLink key={e.a} to={e.a} end={e.a === "/"} className={({ isActive }) => (isActive ? "activo" : "")}>
-            <span aria-hidden="true">{e.i}</span>
-            <span className="txt">{e.t}</span>
+          <NavLink key={e.a} to={e.a} end={e.a === "/"} aria-label={e.t} className={({ isActive }) => (isActive ? "activo" : "")}>
+            <span className="txt" aria-hidden="true">{e.t}</span>
+            <span className="corto" aria-hidden="true">{e.c}</span>
             {e.a === "/alertas" && n > 0 && <span className="insignia" aria-label={`${n} alertas`}>{n}</span>}
           </NavLink>
         ))}

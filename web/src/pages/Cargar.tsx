@@ -45,7 +45,7 @@ export default function Cargar() {
       <h1>Cargar datos</h1>
       <p>Suba el archivo de ventas (CSV) para actualizar las proyecciones y la clasificación del menú.
         El archivo debe tener, al menos: fecha, plato, categoría, cantidad, precio unitario y costo estimado.</p>
-      <p className="aviso bueno">🔒 El archivo nunca sale de su navegador: todo el cálculo se hace en este equipo.</p>
+      <p className="aviso bueno">El archivo nunca sale de su navegador: todo el cálculo se hace en este equipo.</p>
       <div className="campo">
         <label htmlFor="archivo">Archivo de ventas (.csv)</label>
         <input id="archivo" type="file" accept=".csv,text/csv" onChange={alElegir} disabled={ocupado} />
