@@ -42,7 +42,11 @@ def serie_semanal(validos: pd.DataFrame) -> pd.DataFrame:
     largo["unidades"] = largo["unidades"].astype(int)
     # Precio unitario semanal: promedio ponderado por unidades; ffill y luego bfill.
     v = v.assign(ingreso=v["Price Per Item"] * v["Quantity"])
-    g = v.groupby(["Line item name", "Semana"]).agg(ingreso=("ingreso", "sum"), q=("Quantity", "sum"))
+    g = v.groupby(["Line item name", "Semana"]).agg(
+        ingreso=("ingreso", "sum"), q=("Quantity", "sum"), costo=("Est. Cost", "sum"))
+    for col in ("ingreso", "costo"):  # ingreso y costo semanal (0 en semanas sin ventas)
+        m = g[col].unstack("Semana").reindex(index=platos, columns=semanas, fill_value=0).fillna(0)
+        largo[col] = m.stack().reindex(pd.MultiIndex.from_frame(largo[["plato", "semana"]])).to_numpy()
     g["precio"] = g["ingreso"] / g["q"]
     p = g["precio"].unstack("Semana").reindex(index=platos, columns=semanas)
     p = p.T.ffill().bfill().T

@@ -1,0 +1,500 @@
+{
+ "ranking": [
+  {
+   "plato": "Moi Moi - Beans Pudding",
+   "unidades": 529,
+   "semanas_top5": 88,
+   "pct_semanas_con_venta": 80.2547770700637,
+   "mediana_unidades_con_venta": 4.0,
+   "puesto_total": 1
+  },
+  {
+   "plato": "Efo Riro",
+   "unidades": 521,
+   "semanas_top5": 93,
+   "pct_semanas_con_venta": 81.52866242038216,
+   "mediana_unidades_con_venta": 3.0,
+   "puesto_total": 2
+  },
+  {
+   "plato": "Plain Jolof",
+   "unidades": 515,
+   "semanas_top5": 90,
+   "pct_semanas_con_venta": 79.61783439490446,
+   "mediana_unidades_con_venta": 4.0,
+   "puesto_total": 3
+  },
+  {
+   "plato": "Pounded Yam",
+   "unidades": 480,
+   "semanas_top5": 76,
+   "pct_semanas_con_venta": 74.52229299363057,
+   "mediana_unidades_con_venta": 3.0,
+   "puesto_total": 4
+  },
+  {
+   "plato": "Fried Plantain - Dodo",
+   "unidades": 417,
+   "semanas_top5": 73,
+   "pct_semanas_con_venta": 78.98089171974522,
+   "mediana_unidades_con_venta": 3.0,
+   "puesto_total": 5
+  },
+  {
+   "plato": "Egusi (Melon Soup)",
+   "unidades": 396,
+   "semanas_top5": 70,
+   "pct_semanas_con_venta": 74.52229299363057,
+   "mediana_unidades_con_venta": 3.0,
+   "puesto_total": 6
+  },
+  {
+   "plato": "Assorted Meat",
+   "unidades": 317,
+   "semanas_top5": 40,
+   "pct_semanas_con_venta": 54.77707006369427,
+   "mediana_unidades_con_venta": 2.0,
+   "puesto_total": 7
+  },
+  {
+   "plato": "Fried Fish",
+   "unidades": 287,
+   "semanas_top5": 24,
+   "pct_semanas_con_venta": 45.859872611464965,
+   "mediana_unidades_con_venta": 2.0,
+   "puesto_total": 8
+  },
+  {
+   "plato": "Assorted Meat Pepper Soup",
+   "unidades": 239,
+   "semanas_top5": 35,
+   "pct_semanas_con_venta": 59.87261146496815,
+   "mediana_unidades_con_venta": 2.0,
+   "puesto_total": 9
+  },
+  {
+   "plato": "Jolof with Chicken",
+   "unidades": 236,
+   "semanas_top5": 40,
+   "pct_semanas_con_venta": 67.51592356687898,
+   "mediana_unidades_con_venta": 2.0,
+   "puesto_total": 10
+  },
+  {
+   "plato": "Ayamase Sauce",
+   "unidades": 233,
+   "semanas_top5": 45,
+   "pct_semanas_con_venta": 57.32484076433121,
+   "mediana_unidades_con_venta": 2.0,
+   "puesto_total": 11
+  },
+  {
+   "plato": "Boiled Rice with Designer Stew - Ayamase",
+   "unidades": 203,
+   "semanas_top5": 35,
+   "pct_semanas_con_venta": 61.146496815286625,
+   "mediana_unidades_con_venta": 2.0,
+   "puesto_total": 12
+  },
+  {
+   "plato": "Jolof with Beef",
+   "unidades": 187,
+   "semanas_top5": 28,
+   "pct_semanas_con_venta": 57.32484076433121,
+   "mediana_unidades_con_venta": 2.0,
+   "puesto_total": 13
+  },
+  {
+   "plato": "Fried Rice",
+   "unidades": 167,
+   "semanas_top5": 12,
+   "pct_semanas_con_venta": 49.681528662420384,
+   "mediana_unidades_con_venta": 2.0,
+   "puesto_total": 14
+  },
+  {
+   "plato": "Patty",
+   "unidades": 163,
+   "semanas_top5": 15,
+   "pct_semanas_con_venta": 33.12101910828026,
+   "mediana_unidades_con_venta": 2.0,
+   "puesto_total": 15
+  },
+  {
+   "plato": "Meat Pie",
+   "unidades": 137,
+   "semanas_top5": 31,
+   "pct_semanas_con_venta": 28.662420382165607,
+   "mediana_unidades_con_venta": 2.0,
+   "puesto_total": 16
+  },
+  {
+   "plato": "Plain Fried Rice",
+   "unidades": 135,
+   "semanas_top5": 17,
+   "pct_semanas_con_venta": 36.94267515923567,
+   "mediana_unidades_con_venta": 2.0,
+   "puesto_total": 17
+  },
+  {
+   "plato": "Boiled Rice",
+   "unidades": 106,
+   "semanas_top5": 12,
+   "pct_semanas_con_venta": 38.21656050955414,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 18
+  },
+  {
+   "plato": "Extra Stew",
+   "unidades": 102,
+   "semanas_top5": 11,
+   "pct_semanas_con_venta": 31.84713375796178,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 19
+  },
+  {
+   "plato": "Chin Chin",
+   "unidades": 95,
+   "semanas_top5": 13,
+   "pct_semanas_con_venta": 38.21656050955414,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 20
+  },
+  {
+   "plato": "Ogbono",
+   "unidades": 95,
+   "semanas_top5": 9,
+   "pct_semanas_con_venta": 36.30573248407644,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 21
+  },
+  {
+   "plato": "Jolof with Fish",
+   "unidades": 94,
+   "semanas_top5": 16,
+   "pct_semanas_con_venta": 35.031847133757964,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 22
+  },
+  {
+   "plato": "Chicken Suya",
+   "unidades": 86,
+   "semanas_top5": 10,
+   "pct_semanas_con_venta": 34.394904458598724,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 23
+  },
+  {
+   "plato": "Jolof with Curry Goat",
+   "unidades": 86,
+   "semanas_top5": 9,
+   "pct_semanas_con_venta": 36.94267515923567,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 24
+  },
+  {
+   "plato": "Plantain Chips",
+   "unidades": 80,
+   "semanas_top5": 9,
+   "pct_semanas_con_venta": 24.203821656050955,
+   "mediana_unidades_con_venta": 2.0,
+   "puesto_total": 25
+  },
+  {
+   "plato": "Buns",
+   "unidades": 71,
+   "semanas_top5": 5,
+   "pct_semanas_con_venta": 33.12101910828026,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 26
+  },
+  {
+   "plato": "Okro",
+   "unidades": 66,
+   "semanas_top5": 4,
+   "pct_semanas_con_venta": 32.48407643312102,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 27
+  },
+  {
+   "plato": "Amala (Dried Yam Flour)",
+   "unidades": 62,
+   "semanas_top5": 6,
+   "pct_semanas_con_venta": 26.11464968152866,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 28
+  },
+  {
+   "plato": "Assorted Meat Stew",
+   "unidades": 60,
+   "semanas_top5": 2,
+   "pct_semanas_con_venta": 24.840764331210192,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 29
+  },
+  {
+   "plato": "Malta Guinness",
+   "unidades": 60,
+   "semanas_top5": 3,
+   "pct_semanas_con_venta": 26.11464968152866,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 30
+  },
+  {
+   "plato": "Jolof",
+   "unidades": 59,
+   "semanas_top5": 1,
+   "pct_semanas_con_venta": 28.662420382165607,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 31
+  },
+  {
+   "plato": "Beef Suya",
+   "unidades": 57,
+   "semanas_top5": 7,
+   "pct_semanas_con_venta": 26.751592356687897,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 32
+  },
+  {
+   "plato": "Coleslaw",
+   "unidades": 57,
+   "semanas_top5": 4,
+   "pct_semanas_con_venta": 24.203821656050955,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 33
+  },
+  {
+   "plato": "Beef Stew",
+   "unidades": 56,
+   "semanas_top5": 2,
+   "pct_semanas_con_venta": 26.11464968152866,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 34
+  },
+  {
+   "plato": "African Fanta",
+   "unidades": 55,
+   "semanas_top5": 5,
+   "pct_semanas_con_venta": 19.10828025477707,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 35
+  },
+  {
+   "plato": "Maltina",
+   "unidades": 55,
+   "semanas_top5": 5,
+   "pct_semanas_con_venta": 28.02547770700637,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 36
+  },
+  {
+   "plato": "Beans",
+   "unidades": 54,
+   "semanas_top5": 3,
+   "pct_semanas_con_venta": 22.929936305732483,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 37
+  },
+  {
+   "plato": "Stewed Fried Fish",
+   "unidades": 46,
+   "semanas_top5": 1,
+   "pct_semanas_con_venta": 17.8343949044586,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 38
+  },
+  {
+   "plato": "Coke 330ml",
+   "unidades": 41,
+   "semanas_top5": 3,
+   "pct_semanas_con_venta": 17.8343949044586,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 39
+  },
+  {
+   "plato": "Ewedu & Gbegiri (NEW)",
+   "unidades": 39,
+   "semanas_top5": 6,
+   "pct_semanas_con_venta": 21.019108280254777,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 40
+  },
+  {
+   "plato": "Gari (Dried Cassava Flour)",
+   "unidades": 36,
+   "semanas_top5": 1,
+   "pct_semanas_con_venta": 19.745222929936304,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 41
+  },
+  {
+   "plato": "Chicken Stew",
+   "unidades": 35,
+   "semanas_top5": 4,
+   "pct_semanas_con_venta": 17.197452229299362,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 42
+  },
+  {
+   "plato": "Goat Meat Peppersoup",
+   "unidades": 33,
+   "semanas_top5": 8,
+   "pct_semanas_con_venta": 14.012738853503185,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 43
+  },
+  {
+   "plato": "Fried Yam",
+   "unidades": 32,
+   "semanas_top5": 7,
+   "pct_semanas_con_venta": 9.554140127388536,
+   "mediana_unidades_con_venta": 2.0,
+   "puesto_total": 44
+  },
+  {
+   "plato": "Semolina (Maize Flour)",
+   "unidades": 31,
+   "semanas_top5": 3,
+   "pct_semanas_con_venta": 15.92356687898089,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 45
+  },
+  {
+   "plato": "Oha Soup",
+   "unidades": 23,
+   "semanas_top5": 1,
+   "pct_semanas_con_venta": 12.101910828025478,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 46
+  },
+  {
+   "plato": "Bottle Water",
+   "unidades": 21,
+   "semanas_top5": 3,
+   "pct_semanas_con_venta": 8.280254777070065,
+   "mediana_unidades_con_venta": 2.0,
+   "puesto_total": 47
+  },
+  {
+   "plato": "Palm Wine",
+   "unidades": 20,
+   "semanas_top5": 2,
+   "pct_semanas_con_venta": 10.19108280254777,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 48
+  },
+  {
+   "plato": "Grilled Tilapia Fish",
+   "unidades": 18,
+   "semanas_top5": 0,
+   "pct_semanas_con_venta": 8.9171974522293,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 49
+  },
+  {
+   "plato": "PEPPERED TURKEY",
+   "unidades": 17,
+   "semanas_top5": 4,
+   "pct_semanas_con_venta": 8.280254777070065,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 50
+  },
+  {
+   "plato": "Nkwobi",
+   "unidades": 16,
+   "semanas_top5": 2,
+   "pct_semanas_con_venta": 8.9171974522293,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 51
+  },
+  {
+   "plato": "Bitterleaf soup",
+   "unidades": 15,
+   "semanas_top5": 3,
+   "pct_semanas_con_venta": 7.643312101910828,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 52
+  },
+  {
+   "plato": "Jolof Sharing Pack (Plain)",
+   "unidades": 15,
+   "semanas_top5": 0,
+   "pct_semanas_con_venta": 8.9171974522293,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 53
+  },
+  {
+   "plato": "Asun goat meat",
+   "unidades": 14,
+   "semanas_top5": 2,
+   "pct_semanas_con_venta": 5.732484076433121,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 54
+  },
+  {
+   "plato": "Packs of Efo",
+   "unidades": 14,
+   "semanas_top5": 0,
+   "pct_semanas_con_venta": 7.006369426751593,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 55
+  },
+  {
+   "plato": "Fried Rice (Sharing Pack Plain)",
+   "unidades": 12,
+   "semanas_top5": 1,
+   "pct_semanas_con_venta": 7.006369426751593,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 56
+  },
+  {
+   "plato": "Sphagetti Meatballs",
+   "unidades": 12,
+   "semanas_top5": 0,
+   "pct_semanas_con_venta": 7.006369426751593,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 57
+  },
+  {
+   "plato": "African Coke",
+   "unidades": 3,
+   "semanas_top5": 1,
+   "pct_semanas_con_venta": 1.910828025477707,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 58
+  },
+  {
+   "plato": "Packs of Afang (Pre-order)",
+   "unidades": 2,
+   "semanas_top5": 0,
+   "pct_semanas_con_venta": 1.2738853503184713,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 59
+  },
+  {
+   "plato": "Packs of Edikan-Ikong (Pre-order)",
+   "unidades": 2,
+   "semanas_top5": 0,
+   "pct_semanas_con_venta": 1.2738853503184713,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 60
+  },
+  {
+   "plato": "Packs of Egusi",
+   "unidades": 2,
+   "semanas_top5": 0,
+   "pct_semanas_con_venta": 1.2738853503184713,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 61
+  },
+  {
+   "plato": "Beans Puree (Ewa Again)",
+   "unidades": 1,
+   "semanas_top5": 0,
+   "pct_semanas_con_venta": 0.6369426751592356,
+   "mediana_unidades_con_venta": 1.0,
+   "puesto_total": 62
+  }
+ ]
+}

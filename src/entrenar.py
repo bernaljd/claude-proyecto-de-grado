@@ -81,6 +81,7 @@ def main():
         "n_arboles": n_arb, "metricas": metr[vigente],
         "criterio_exito_xgb_mejor_en_n_de_3_metricas_prueba": int(mejores)}, indent=2, ensure_ascii=False))
     m_fin.save_model(MOD / "xgb.json")
+    (MOD / "xgb_config.json").write_text(json.dumps({"params": params, "n_arboles": n_arb}, indent=2))
 
     tablas(metr, params, n_arb, res)
     figuras(preds, sets, m_fin, cols)

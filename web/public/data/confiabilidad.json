@@ -1,0 +1,27 @@
+{
+ "modelo_vigente": "Modelo base (mm4)",
+ "hiperparametros": {},
+ "metricas_prueba": {
+  "por_plato": {
+   "MAE": 0.4995726495726496,
+   "RMSE": 0.8705165967970658,
+   "SMAPE": 102.57467205646495
+  },
+  "total_semanal": {
+   "MAE": 9.51923076923077,
+   "RMSE": 11.725834397077776,
+   "SMAPE": 62.50123976839881
+  }
+ },
+ "rango_datos": {
+  "desde": "2023-01-02",
+  "hasta": "2025-12-29"
+ },
+ "fecha_calculo": "2026-10-26 00:43",
+ "frases": {
+  "MAE": "En promedio, la proyección se aleja 0.50 unidades por plato y semana.",
+  "RMSE": "Los errores grandes pesan más: el desvío típico es de 0.87 unidades por plato y semana.",
+  "SMAPE": "En porcentaje, el error relativo promedio por plato es de 103 %; es alto porque la mayoría de platos vende pocas unidades por semana.",
+  "total": "Para la demanda total de la semana, la proyección se aleja 9.5 unidades en promedio."
+ }
+}
