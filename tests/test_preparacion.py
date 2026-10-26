@@ -76,3 +76,23 @@ def test_dataset_procesado_en_disco():
     assert len(s) == 9734 and s["unidades"].sum() == 7118
     assert m["plato"].nunique() == 45
     assert m.groupby("conjunto")["semana"].nunique().to_dict() == {"entrenamiento": 105, "validacion": 26, "prueba": 26}
+
+
+def test_ventaneo_a_mano():
+    from src.ventaneo import ventanear
+    serie = pd.DataFrame({"plato": ["A"] * 6, "semana": pd.date_range("2024-01-01", periods=6, freq="7D"),
+                          "unidades": [20, 25, 5, 20, 30, 40]})
+    w = ventanear(serie, 3)
+    assert len(w) == 3
+    assert w.iloc[0][["x_1", "x_2", "x_3", "y"]].tolist() == [20, 25, 5, 20]
+    assert w.iloc[1][["x_1", "x_2", "x_3", "y"]].tolist() == [25, 5, 20, 30]
+    assert w.iloc[2][["x_1", "x_2", "x_3", "y"]].tolist() == [5, 20, 30, 40]
+
+
+def test_ventaneo_coincide_con_los_rezagos(d):
+    """La ventana de 4 semanas es la misma información que lag_1..lag_4 de las variables de XGBoost."""
+    from src.ventaneo import ventanear
+    serie, var = d[1], d[3]
+    w = ventanear(serie, 4, {"Efo Riro"}).set_index("semana")
+    v = var[var.plato == "Efo Riro"].set_index("semana").loc[w.index]
+    assert (w["x_4"] == v["lag_1"]).all() and (w["x_1"] == v["lag_4"]).all() and (w["y"] == v["unidades"]).all()

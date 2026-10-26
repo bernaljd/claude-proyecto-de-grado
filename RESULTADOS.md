@@ -61,6 +61,25 @@ Métricas de validación (MAE por plato): base 0,639; XGBoost 0,699; LSTM 0,590.
 
 **Versiones:** `results/versions.txt` (Python 3.13.17, pandas 3.0.5, numpy 2.5.3, xgboost 3.4.1, scikit-learn 1.9.1, matplotlib 3.11.2, pyarrow 26.0.0, torch 2.14.1, pytest 9.1.1; Node 22, Vite 5, React 18, vitest 2).
 
+## Datos y ventaneo: de dónde leen los modelos
+
+`python -m src.pipeline` convierte el CSV en los datasets de `data/processed/`:
+
+| Archivo | Contenido |
+|---|---|
+| `ventas_depuradas.parquet` | Registros válidos (sin cancelados) |
+| `serie_semanal.csv` / `.parquet` | Tabla larga `plato, semana, unidades` (más precio, ingreso y costo), con ceros: 157 semanas × 62 platos |
+| `estados_platos.csv` | Modelable, historial insuficiente o retirado |
+| `dataset_modelado.csv` | Variables de XGBoost y del modelo base (rezagos, media móvil, calendario, precio) y conjunto |
+| `dataset_ventaneado_V4.csv`, `_V12.csv` | **Ventaneo**: una fila por plato y semana objetivo con `x_1 … x_V` (las V semanas previas) e `y` (unidades de la semana objetivo), y el conjunto |
+
+Ejemplo con ventana V = 3 sobre un plato con ventas 20, 25, 5, 20, 30, 40: las filas son `(20, 25, 5 → 20)`, `(25, 5, 20 → 30)` y `(5, 20, 30 → 40)`. Hay una prueba que lo verifica (`test_ventaneo_a_mano`).
+
+Cada modelo usa el ventaneo así:
+- **Modelo base y XGBoost:** ventana de 4 semanas (`lag_1 … lag_4` equivalen a `x_4 … x_1`; hay una prueba de que coinciden) más media móvil, calendario y precio.
+- **LSTM:** ventana deslizante de 12 semanas (la elegida en validación), donde cada paso trae unidades, precio y calendario.
+- La partición en entrenamiento, validación y prueba se hace por la fecha de la semana objetivo, así que ninguna ventana usa información de la semana que predice ni de las posteriores.
+
 ## 3. Validación funcional
 
 | Requisito | Método | Resultado | Evidencia |

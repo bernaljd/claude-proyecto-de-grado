@@ -7,7 +7,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from .preparacion import COLUMNAS_BASE, preparar
+from .preparacion import COLUMNAS_BASE, asignar_conjunto, preparar
+from .ventaneo import ventanear
 
 PROCESADOS = Path("data/processed")
 
@@ -29,6 +30,13 @@ def ejecutar(guardar: bool = True):
         cols = ["plato", "categoria", "semana", "conjunto", "idx_semana", "unidades"] + COLUMNAS_BASE
         modelo[cols].to_parquet(PROCESADOS / "dataset_modelado.parquet", index=False)
         modelo[cols].to_csv(PROCESADOS / "dataset_modelado.csv", index=False)
+        # Dataset ventaneado (x_1 ... x_V = semanas t-V ... t-1, y = semana t): V=4 (XGBoost) y V=12 (LSTM)
+        modelables = set(estados[estados == "modelable"].index)
+        for v in (4, 12):
+            w = ventanear(serie, v, modelables)
+            w["conjunto"] = asignar_conjunto(w["semana"])
+            w.to_parquet(PROCESADOS / f"dataset_ventaneado_V{v}.parquet", index=False)
+            w.to_csv(PROCESADOS / f"dataset_ventaneado_V{v}.csv", index=False)
     return validos, serie, estados, var
 
 
