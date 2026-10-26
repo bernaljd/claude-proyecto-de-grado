@@ -1,8 +1,9 @@
-# El sitio es solo web/. Se excluye el código Python para que Vercel no lo detecte como proyecto Python.
-requirements.txt
-src/
-tests/
-data/
-models/
-results/
-scripts/
+# El sitio es solo web/. Se excluye el código Python de la raíz para que Vercel no lo detecte como proyecto Python.
+# Las barras iniciales anclan los patrones a la raíz (sin ellas también borrarían web/src y web/public/data).
+/requirements.txt
+/src/
+/tests/
+/data/
+/models/
+/results/
+/scripts/
