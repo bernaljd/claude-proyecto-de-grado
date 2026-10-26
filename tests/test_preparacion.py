@@ -65,3 +65,14 @@ def test_sin_fuga(d):
 def test_smape_cero_cero():
     assert smape([0, 0], [0, 0]) == 0.0
     assert smape([0], [2]) == 200.0
+
+
+def test_dataset_procesado_en_disco():
+    """Los modelos leen data/processed/: la serie y el dataset de modelado deben existir y cuadrar."""
+    from src.pipeline import PROCESADOS, ejecutar
+    ejecutar()
+    s = pd.read_parquet(PROCESADOS / "serie_semanal.parquet")
+    m = pd.read_parquet(PROCESADOS / "dataset_modelado.parquet")
+    assert len(s) == 9734 and s["unidades"].sum() == 7118
+    assert m["plato"].nunique() == 45
+    assert m.groupby("conjunto")["semana"].nunique().to_dict() == {"entrenamiento": 105, "validacion": 26, "prueba": 26}

@@ -13,7 +13,8 @@ from .evaluacion import metricas
 from .modelos import lstm as lm
 from .modelos import xgboost_modelo as xm
 from .modelos.base import predecir_base
-from .preparacion import COLUMNAS_BASE, matriz_modelo, preparar
+from .pipeline import ejecutar
+from .preparacion import COLUMNAS_BASE, matriz_modelo
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
@@ -27,7 +28,7 @@ def coma(x, dec=3):
 
 
 def datos_modelo():
-    validos, serie, estados, var = preparar()
+    validos, serie, estados, var = ejecutar()  # escribe data/processed/
     modelables = sorted(estados[estados == "modelable"].index)
     cats = sorted(var.loc[var.plato.isin(modelables), "categoria"].unique())
     X = matriz_modelo(var[var.plato.isin(modelables)], modelables, cats)

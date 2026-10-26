@@ -108,7 +108,8 @@ Pruebas automáticas: `pytest` 11 pasan; `vitest` 9 pasan (paridad del XGBoost e
 pip install -r requirements.txt
 cd web && npm install && cd ..
 
-# 2. Entrenar (incluye la LSTM; tarda unos 25 min en CPU) y exportar
+# 2. Preparar datos (escribe data/processed/), entrenar (incluye la LSTM; tarda unos 25 min en CPU) y exportar
+python -m src.pipeline
 python -m src.entrenar
 python -m src.exportar
 

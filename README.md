@@ -13,6 +13,7 @@ se publica sin servidor y el cálculo en el navegador mantiene los datos del res
 ## Ejecutar (Python, solo en el computador de los autores)
 ```bash
 pip install -r requirements.txt pytest
+python -m src.pipeline     # CSV -> data/processed/ (serie semanal y dataset de modelado)
 python -m src.entrenar     # búsqueda en validación, evaluación, results/ y models/
 python -m src.exportar     # escribe web/public/data/*.json y las fixtures de paridad
 python -m pytest
