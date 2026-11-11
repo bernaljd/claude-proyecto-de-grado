@@ -1,0 +1,63 @@
+plato,categoria,estado_plato,semana_pronostico,unidades_ultima_semana,unidades_pronosticadas,unidades_redondeadas,metodo,pred_mm4,pred_gradient_boosting,pred_lstm,pred_arima,pred_sarima,lun,mar,mie,jue,vie,sab,reparto_dia_segun
+African Coke,Drinks,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+African Fanta,Drinks,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Amala (Dried Yam Flour),Extras,modelable,2026-01-05,0,0.0000,0,LSTM,0.0000,0.0000,0.0000,0.0000,0.3349,0,0,0,0,0,0,categoria
+Assorted Meat,Extras,modelable,2026-01-05,0,0.0554,0,LSTM,0.2500,0.0000,0.0554,0.3468,0.2671,0,0,0,0,0,0,categoria
+Assorted Meat Pepper Soup,Apetisers,modelable,2026-01-05,0,0.2698,0,LSTM,0.0000,0.0000,0.2698,0.0000,0.0061,0,0,0,0,0,0,categoria
+Assorted Meat Stew,Extras,modelable,2026-01-05,0,0.0004,0,LSTM,0.0000,0.0000,0.0004,0.0000,0.0039,0,0,0,0,0,0,categoria
+Asun goat meat,Apetisers,historial_insuficiente,2026-01-05,0,0.0000,0,media_movil,,,,,,0,0,0,0,0,0,categoria
+Ayamase Sauce,Extras,modelable,2026-01-05,0,0.1833,0,LSTM,0.0000,0.0000,0.1833,0.0000,0.4239,0,0,0,0,0,0,categoria
+Beans,Special orders,modelable,2026-01-05,0,0.0000,0,LSTM,0.0000,0.0000,0.0000,0.0000,0.0000,0,0,0,0,0,0,menu
+Beans Puree (Ewa Again),Special orders,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Beef Stew,Extras,modelable,2026-01-05,0,0.0010,0,LSTM,0.0000,0.0000,0.0010,0.0000,0.1496,0,0,0,0,0,0,categoria
+Beef Suya,Apetisers,modelable,2026-01-05,0,0.0015,0,LSTM,0.0000,0.0000,0.0015,0.0000,0.4243,0,0,0,0,0,0,categoria
+Bitterleaf soup,Soups,historial_insuficiente,2026-01-05,0,0.0000,0,media_movil,,,,,,0,0,0,0,0,0,categoria
+Boiled Rice,Extras,modelable,2026-01-05,0,0.0022,0,LSTM,0.0000,0.0000,0.0022,0.0000,0.4654,0,0,0,0,0,0,categoria
+Boiled Rice with Designer Stew - Ayamase,Main courses,modelable,2026-01-05,2,0.9762,1,LSTM,1.7500,0.2952,0.9762,1.6902,1.0579,0,0,1,0,0,0,plato
+Bottle Water,Drinks,modelable,2026-01-05,0,0.0000,0,LSTM,0.0000,0.0000,0.0000,0.0000,0.0312,0,0,0,0,0,0,categoria
+Buns,Apetisers,modelable,2026-01-05,0,0.0001,0,LSTM,0.0000,0.0000,0.0001,0.0000,0.1261,0,0,0,0,0,0,categoria
+Chicken Stew,Extras,modelable,2026-01-05,0,0.0005,0,LSTM,0.0000,0.0000,0.0005,0.0000,0.2797,0,0,0,0,0,0,categoria
+Chicken Suya,Apetisers,modelable,2026-01-05,0,0.0092,0,LSTM,0.0000,0.0000,0.0092,0.0000,0.3537,0,0,0,0,0,0,categoria
+Chin Chin,Apetisers,modelable,2026-01-05,0,0.1101,0,LSTM,0.0000,0.0000,0.1101,0.0000,0.2802,0,0,0,0,0,0,categoria
+Coke 330ml,Drinks,modelable,2026-01-05,0,0.0022,0,LSTM,0.2500,0.0000,0.0022,0.2257,0.0629,0,0,0,0,0,0,categoria
+Coleslaw,Extras,modelable,2026-01-05,0,0.0000,0,LSTM,0.0000,0.0000,0.0000,0.0000,0.2482,0,0,0,0,0,0,categoria
+Efo Riro,Soups,modelable,2026-01-05,0,0.8536,1,LSTM,0.0000,0.0000,0.8536,0.0000,0.9156,0,0,0,1,0,0,plato
+Egusi (Melon Soup),Soups,modelable,2026-01-05,0,0.7602,1,LSTM,0.2500,0.0000,0.7602,0.0000,1.1533,0,0,0,0,1,0,plato
+Ewedu & Gbegiri (NEW),Soups,modelable,2026-01-05,0,0.0002,0,LSTM,0.0000,0.0000,0.0002,0.0000,0.2728,0,0,0,0,0,0,categoria
+Extra Stew,Extras,modelable,2026-01-05,0,0.0010,0,LSTM,0.0000,0.0000,0.0010,0.0000,0.0000,0,0,0,0,0,0,categoria
+Fried Fish,Extras,modelable,2026-01-05,0,0.0000,0,LSTM,0.0000,0.0000,0.0000,0.0000,0.0000,0,0,0,0,0,0,categoria
+Fried Plantain - Dodo,Extras,modelable,2026-01-05,0,0.5365,1,LSTM,0.2500,0.0000,0.5365,0.0000,0.8495,0,0,1,0,0,0,plato
+Fried Rice,Main courses,modelable,2026-01-05,0,0.0458,0,LSTM,0.0000,0.0000,0.0458,0.0000,0.0000,0,0,0,0,0,0,categoria
+Fried Rice (Sharing Pack Plain),Restaurant deals,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Fried Yam,Apetisers,historial_insuficiente,2026-01-05,0,0.0000,0,media_movil,,,,,,0,0,0,0,0,0,categoria
+Gari (Dried Cassava Flour),Extras,modelable,2026-01-05,0,0.0007,0,LSTM,0.0000,0.0000,0.0007,0.0000,0.0000,0,0,0,0,0,0,categoria
+Goat Meat Peppersoup,Apetisers,historial_insuficiente,2026-01-05,1,0.5000,1,media_movil,,,,,,0,0,1,0,0,0,categoria
+Grilled Tilapia Fish,Special orders,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Jolof,Main courses,modelable,2026-01-05,0,0.0000,0,LSTM,0.0000,0.0000,0.0000,0.0000,0.1535,0,0,0,0,0,0,categoria
+Jolof Sharing Pack (Plain),Restaurant deals,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Jolof with Beef,Main courses,modelable,2026-01-05,0,0.3804,0,LSTM,0.2500,0.0000,0.3804,0.0000,0.6545,0,0,0,0,0,0,categoria
+Jolof with Chicken,Main courses,modelable,2026-01-05,0,0.3604,0,LSTM,0.5000,0.0000,0.3604,0.2521,0.2819,0,0,0,0,0,0,categoria
+Jolof with Curry Goat,Main courses,modelable,2026-01-05,0,0.0000,0,LSTM,0.7500,0.0000,0.0000,0.3354,0.5367,0,0,0,0,0,0,categoria
+Jolof with Fish,Main courses,modelable,2026-01-05,0,0.0017,0,LSTM,0.0000,0.0000,0.0017,0.0000,0.7923,0,0,0,0,0,0,categoria
+Malta Guinness,Drinks,modelable,2026-01-05,0,0.0002,0,LSTM,0.2500,0.0000,0.0002,0.0000,0.1341,0,0,0,0,0,0,categoria
+Maltina,Drinks,modelable,2026-01-05,0,0.0136,0,LSTM,0.7500,0.0000,0.0136,0.7540,0.3886,0,0,0,0,0,0,categoria
+Meat Pie,Apetisers,modelable,2026-01-05,0,0.1511,0,LSTM,0.2500,0.0000,0.1511,0.3979,0.7737,0,0,0,0,0,0,plato
+Moi Moi - Beans Pudding,Extras,modelable,2026-01-05,0,1.0646,1,LSTM,0.2500,0.0000,1.0646,0.3801,1.8277,0,0,0,0,1,0,plato
+Nkwobi,Apetisers,historial_insuficiente,2026-01-05,0,0.0000,0,media_movil,,,,,,0,0,0,0,0,0,categoria
+Ogbono,Soups,modelable,2026-01-05,0,0.0000,0,LSTM,0.0000,0.0000,0.0000,0.0000,0.1018,0,0,0,0,0,0,categoria
+Oha Soup,Soups,historial_insuficiente,2026-01-05,0,0.0000,0,media_movil,,,,,,0,0,0,0,0,0,categoria
+Okro,Soups,modelable,2026-01-05,0,0.0060,0,LSTM,0.2500,0.0000,0.0060,0.1430,0.0922,0,0,0,0,0,0,categoria
+Packs of Afang (Pre-order),Restaurant deals,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Packs of Edikan-Ikong (Pre-order),Restaurant deals,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Packs of Efo,Restaurant deals,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Packs of Egusi,Restaurant deals,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Palm Wine,Drinks,modelable,2026-01-05,0,0.0001,0,LSTM,0.0000,0.0000,0.0001,0.0000,0.0163,0,0,0,0,0,0,categoria
+Patty,Apetisers,modelable,2026-01-05,0,0.0000,0,LSTM,0.0000,0.0000,0.0000,0.0000,0.1657,0,0,0,0,0,0,categoria
+Peppered Turkey,Apetisers,historial_insuficiente,2026-01-05,0,0.0000,0,media_movil,,,,,,0,0,0,0,0,0,categoria
+Plain Fried Rice,Extras,modelable,2026-01-05,0,0.0020,0,LSTM,0.0000,0.0000,0.0020,0.0000,0.0000,0,0,0,0,0,0,categoria
+Plain Jolof,Extras,modelable,2026-01-05,0,0.1645,0,LSTM,0.2500,0.0000,0.1645,0.0000,0.0911,0,0,0,0,0,0,categoria
+Plantain Chips,Apetisers,modelable,2026-01-05,1,0.0007,0,LSTM,0.2500,0.0000,0.0007,0.2074,0.0000,0,0,0,0,0,0,categoria
+Pounded Yam,Extras,modelable,2026-01-05,0,0.2046,0,LSTM,0.0000,0.0000,0.2046,0.0000,0.0513,0,0,0,0,0,0,plato
+Semolina (Maize Flour),Extras,modelable,2026-01-05,0,0.0000,0,LSTM,0.0000,0.0000,0.0000,0.0000,0.1120,0,0,0,0,0,0,categoria
+Sphagetti Meatballs,Main courses,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Stewed Fried Fish,Extras,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,

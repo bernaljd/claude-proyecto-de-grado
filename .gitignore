@@ -1,5 +1,8 @@
 __pycache__/
-.pytest_cache/
-node_modules/
-web/dist/
 *.pyc
+.DS_Store
+node_modules/
+dashboard/dist/
+dashboard/test-results/
+dashboard/playwright-report/
+dataset/processed/*.parquet
