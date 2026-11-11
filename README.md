@@ -1,48 +1,88 @@
-# DSS para un restaurante PyME: predicción de demanda + ingeniería de menú
+# DSS para un restaurante pyme: pronóstico de demanda e ingeniería de menú
 
-Python (CRISP-DM) prepara los datos, entrena y evalúa los modelos y exporta tablas CSV estáticas.
-El dashboard (`web/`, React + Vite + TypeScript) lee esos CSV y se publica como **sitio estático** en Vercel,
-sin servidor. La carga de un CSV nuevo se calcula en el navegador (el archivo no sale del equipo).
+Trabajo de grado de Ingeniería de Sistemas (Pontificia Universidad Javeriana Cali).
+Sistema de soporte a la toma de decisiones (DSS) que combina **pronóstico de demanda
+por plato con machine learning** (MM4, GradientBoosting, LSTM, ARIMA y SARIMA) e
+**ingeniería de menú (Kasavana y Smith)**, con un **dashboard web de solo lectura**.
 
-**Por qué no Streamlit:** el cliente pidió acceso desde celular y tableta (RNF-03); un sitio estático responsive
-se publica sin servidor y el cálculo en el navegador mantiene los datos del restaurante en su equipo.
+## Estructura del repositorio
 
-**Terminología de conjuntos** (convención scikit-learn): *validación* = elegir hiperparámetros y modelo
-(2025-01-06 a 2025-06-30); *prueba* = evaluación final, una sola vez (2025-07-07 a 2025-12-29).
-
-## Ejecutar (Python, solo en el computador de los autores)
-```bash
-pip install -r requirements.txt pytest
-python -m src.pipeline     # CSV -> data/processed/ (serie semanal y dataset de modelado)
-python -m src.entrenar     # búsqueda en validación, evaluación, results/ y models/
-python -m src.exportar     # escribe web/public/data/*.csv y las fixtures de paridad
-python -m pytest
 ```
-Cambiar el modelo vigente solo exige reentrenar y exportar de nuevo: el dashboard lee `modelo_meta.csv`.
-
-## Dashboard en local
-```bash
-cd web && npm install
-npm run dev              # desarrollo
-npm run dev -- --host    # abrirlo desde el celular en la red local
-npm run build && npm run preview
-npm test                 # vitest: paridad XGBoost, preparación, ingeniería de menú, reparto diario
+dataset/raw/ventas_originales.csv   Ventas del restaurante (entrada de M1, sin modificar)
+dataset/processed/                  CSV que produce el pipeline (M1 a M6)
+code/src/                           Pipeline de Python: m1_… a m6_…
+code/requirements.txt               Dependencias del pipeline
+modelos/                            Modelos reentrenados que deja M4
+dashboard/                          Dashboard web (React + Vite + TypeScript)
+dashboard/public/data/              Copia de los CSV que lee el navegador + manifiesto.json
+dashboard/capturas/                 Capturas a 360, 768 y 1280 px (las genera Playwright)
 ```
-RNF-03/RNF-04 (con `npm run preview` activo): `NODE_PATH=$(npm root -g) node scripts/verificar_web.cjs`
 
-## Publicar en Vercel
+Regla de oro: **el dashboard no calcula pronósticos ni entrena nada**: lee los CSV y
+los muestra, cada número con su fuente (archivo, módulo M1–M6 y origen OBS/PRED/CALC).
+El único cálculo del navegador es la matriz de menú al cambiar el período, con la
+misma fórmula del pipeline y una prueba que exige que reproduzca `06_ingenieria_menu.csv`.
+
+## Correr el pipeline (Python)
+
+```bash
+pip install -r code/requirements.txt
+```
+
+```bash
+cd code/src && python3 m1_ingesta_limpieza.py && python3 m2_serie_semanal.py && python3 m3_ventanas_modelos.py && python3 m4_entrenamiento.py && python3 m5_evaluacion.py && python3 m6_pronostico_menu.py
+```
+
+M4 (entrenamiento) tarda unos 15 minutos. Cada módulo se detiene con un
+`AssertionError` si falla un control de calidad y no escribe salidas a medias.
+
+## Correr el dashboard en el computador
+
+```bash
+cd dashboard && npm install && npm run dev
+```
+
+Abre `http://localhost:5173`. Los CSV ya están copiados en `dashboard/public/data/`.
+
+## Actualizar los datos
+
+1. Reemplace `dataset/raw/ventas_originales.csv` por el CSV de ventas nuevo
+   (las mismas 14 columnas del restaurante).
+2. Desde `dashboard/`:
+
+```bash
+npm run actualizar
+```
+
+Corre M1→M6 en orden (avisa antes de M4, que tarda ~15 min), se detiene en el primer
+error, copia los 11 CSV a `dashboard/public/data/` y escribe `manifiesto.json`.
+Si los CSV ya están generados, `npm run copiar` hace solo la copia.
+
+3. Recargue la página del dashboard.
+
+## Pruebas
+
+```bash
+cd dashboard && npm test        # vitest: parseo, formato, regla de la matriz,
+                                # paridad con 06_ingenieria_menu.csv, reparto por día,
+                                # detección de columnas pred_* y RNF-02
+npm run build                   # TypeScript + Vite sin errores
+npm run capturas                # Playwright sobre npm run preview: cada ruta a 360,
+                                # 768 y 1280 px, falla si hay scroll horizontal,
+                                # exige carga < 3 s y guarda dashboard/capturas/
+```
+
+## Publicar en Vercel (sitio estático)
+
 1. Suba el repositorio a GitHub.
-2. En Vercel: *Add New → Project* e importe el repositorio.
-3. **Root Directory: `web`**. Framework preset: Vite. Build `npm run build`, salida `dist`.
-4. *Deploy*. No requiere variables de entorno ni funciones; `web/vercel.json` redirige las rutas al SPA.
+2. En Vercel: **Add New → Project** e importe el repositorio.
+3. Configure: **Framework Preset: Vite** · **Root Directory: `dashboard`** ·
+   salida `dist` (la del preset). No se necesitan variables de entorno.
+4. Deploy. `dashboard/vercel.json` ya reescribe todas las rutas a `index.html`
+   para que funcionen las direcciones como `/menu` o `/demanda/<plato>`.
 
-## Modelos
-Modelo base (media móvil de 4 semanas), XGBoost y LSTM (PyTorch). El vigente es el de menor MAE en validación
-(`models/modelo_vigente.csv`). El navegador solo evalúa XGBoost; si el vigente es la LSTM, las proyecciones
-originales usan la LSTM y la recarga de un archivo usa XGBoost (se avisa en «Confiabilidad»).
-Resultados completos en `RESULTADOS.md`; estado y pendientes en `ESTADO_DEL_PROYECTO.md`.
-
-### Si Vercel dice que no encuentra el punto de entrada de Python
-Vercel está construyendo desde la raíz y ve `requirements.txt`. Solución: *Settings → General → Root Directory → `web`* y volver a desplegar.
-Como respaldo, la raíz trae un `vercel.json` y un `.vercelignore` que permiten desplegar también desde la raíz
-(construye `web/` y publica `web/dist`); no se pudo probar contra Vercel desde este entorno.
+**Por qué un sitio estático:** el administrador puede consultarlo desde el celular
+sin instalar nada, no hay servidor ni funciones que mantener, y los datos del
+restaurante se quedan en su equipo: solo se publican los CSV de resultados que el
+dueño decide copiar, y la vista «Cargar datos» valida archivos sin que salgan del
+navegador.

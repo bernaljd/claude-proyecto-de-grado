@@ -1,0 +1,82 @@
+{
+  "generado_en": "2026-11-11T04:16:10.028Z",
+  "archivos": [
+    {
+      "nombre": "01_ventas_limpias.csv",
+      "modulo": "M1",
+      "filas": 4361,
+      "bytes": 368289,
+      "copiado_en": "2026-11-11T04:16:10.030Z"
+    },
+    {
+      "nombre": "02_serie_semanal.csv",
+      "modulo": "M2",
+      "filas": 9734,
+      "bytes": 588111,
+      "copiado_en": "2026-11-11T04:16:10.034Z"
+    },
+    {
+      "nombre": "03_particion_semanas.csv",
+      "modulo": "M3",
+      "filas": 157,
+      "bytes": 3688,
+      "copiado_en": "2026-11-11T04:16:10.034Z"
+    },
+    {
+      "nombre": "03_platos_modelables.csv",
+      "modulo": "M3",
+      "filas": 62,
+      "bytes": 3329,
+      "copiado_en": "2026-11-11T04:16:10.035Z"
+    },
+    {
+      "nombre": "04_entrenamiento.csv",
+      "modulo": "M4",
+      "filas": 234,
+      "bytes": 41463,
+      "copiado_en": "2026-11-11T04:16:10.035Z"
+    },
+    {
+      "nombre": "04_matriz_confusion.csv",
+      "modulo": "M4",
+      "filas": 5,
+      "bytes": 137,
+      "copiado_en": "2026-11-11T04:16:10.035Z"
+    },
+    {
+      "nombre": "05_predicciones.csv",
+      "modulo": "M5",
+      "filas": 1222,
+      "bytes": 91319,
+      "copiado_en": "2026-11-11T04:16:10.036Z"
+    },
+    {
+      "nombre": "05_metricas.csv",
+      "modulo": "M5",
+      "filas": 6,
+      "bytes": 954,
+      "copiado_en": "2026-11-11T04:16:10.036Z"
+    },
+    {
+      "nombre": "05_matriz_confusion.csv",
+      "modulo": "M5",
+      "filas": 6,
+      "bytes": 157,
+      "copiado_en": "2026-11-11T04:16:10.036Z"
+    },
+    {
+      "nombre": "06_pronostico.csv",
+      "modulo": "M6",
+      "filas": 62,
+      "bytes": 6927,
+      "copiado_en": "2026-11-11T04:16:10.037Z"
+    },
+    {
+      "nombre": "06_ingenieria_menu.csv",
+      "modulo": "M6",
+      "filas": 72,
+      "bytes": 9194,
+      "copiado_en": "2026-11-11T04:16:10.037Z"
+    }
+  ]
+}
